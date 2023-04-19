@@ -1,19 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import CountDown from 'react-native-countdown-component';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
+import { useCountdown } from 'react-native-countdown-circle-timer'
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text>Descanço de 1:10</Text>
-      <button>
-        
-      </button>
-      <CountDown>
-        until={70}
-        timeToShow={['M', 'S']}
-        onFinish={() => alert('Fim do descanço.')}
-      </CountDown>
+      <button>1:10</button>
+      <CountdownCircleTimer
+      isPlaying
+      duration={70}
+      colors={['#004777']}
+      size = '40'
+      strokeWidth={3}
+      >
+    {({ remainingTime }) => <Text>{remainingTime}</Text>}
+    </CountdownCircleTimer>
       <StatusBar style="auto" />
     </View>
   );
