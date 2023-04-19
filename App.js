@@ -1,10 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import CountDown from 'react-native-countdown-component';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Descanço de 1:10</Text>
+      <button>
+        
+      </button>
+      <CountDown>
+        until={70}
+        timeToShow={['M', 'S']}
+        onFinish={() => alert('Fim do descanço.')}
+      </CountDown>
       <StatusBar style="auto" />
     </View>
   );
