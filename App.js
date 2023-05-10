@@ -7,7 +7,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Descanço de 1:10</Text>
-      <button>1:10</button>
+      
       <CountdownCircleTimer
       isPlaying
       duration={70}
@@ -17,6 +17,7 @@ export default function App() {
       >
     {({ remainingTime }) => <Text>{remainingTime}</Text>}
     </CountdownCircleTimer>
+    <button>{remainingTime}</button>
       <StatusBar style="auto" />
     </View>
   );
