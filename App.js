@@ -1,14 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView } from 'react-native';
-/* import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';*/
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-export default function App() {
+function ConfigScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Configuração</Text>
+    </View>
+  );
+}
+
+function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#76d600'}}>
       <View style={styles.menu}>
-      
-      <TouchableOpacity style={styles.bttnConfig} activeOpacity={0.9}>
+      <TouchableOpacity style={styles.bttnConfig} activeOpacity={0.9} 
+      onPress={() => navigation.navigate('Config')}>
         <Image
         source={require('./images/config.png')}
         style={styles.buttonIcon}
@@ -33,6 +41,21 @@ export default function App() {
     </SafeAreaView>
   );
 }
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen options={{headerShown: false}} name='Home' component={HomeScreen}/>
+        <Stack.Screen name='Config' component={ConfigScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
 
 const styles = StyleSheet.create({
   menu: {
