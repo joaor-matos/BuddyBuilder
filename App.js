@@ -49,7 +49,8 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen options={{headerShown: false}} name='Home' component={HomeScreen}/>
-        <Stack.Screen name='Config' component={ConfigScreen}/>
+        <Stack.Screen options={{
+            title: <Text style={{fontSize: 10}}>Configurações</Text>, headerStyle:{height: 30, justifyContent: 'center'}}} name='Config' component={ConfigScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
