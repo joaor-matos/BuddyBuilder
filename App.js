@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, ScrollView } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { startTransition } from 'react';
+// import { Stopwatch, Timer } from 'react-native-stopwatch-timer';
 
 function ConfigScreen({ navigation }) {
   return (
@@ -13,7 +15,7 @@ function ConfigScreen({ navigation }) {
 
 function HomeScreen({ navigation }) {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#76d600'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#76d600', flexDirection: 'column'}}>
       <View style={styles.menu}>
       <TouchableOpacity style={styles.bttnConfig} activeOpacity={0.9} 
       onPress={() => navigation.navigate('Config')}>
@@ -29,16 +31,26 @@ function HomeScreen({ navigation }) {
         style={styles.buttonIcon}
         />
       </TouchableOpacity>
+
       <View style={styles.separator}/>
+
       <TouchableOpacity style={styles.bttnTreino} activeOpacity={0.9}>
         <Image
         source={require('./images/treino.png')}
         style={styles.iconTreino}
         />
       </TouchableOpacity>
+
       <StatusBar style="auto" />
+
       </View>
+      <View style={styles.viewTreino}>
+        <ScrollView style={styles.scrollTreino}>
+      
+        </ScrollView>
+    </View>
     </SafeAreaView>
+
   );
 }
 
@@ -60,7 +72,7 @@ export default App;
 
 const styles = StyleSheet.create({
   menu: {
-    flex: 1,
+    flex: 0.10,
     padding: 10,
     backgroundColor: '#76d600',
     alignItems: '',
@@ -70,9 +82,9 @@ const styles = StyleSheet.create({
   navegar: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#485a96',
+    backgroundColor: 'black',
     borderWidth: 0.5,
-    borderColor: '#fff',
+    borderColor: '#white',
     height: 40,
     borderRadius: 5,
     margin: 5,
@@ -82,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 40,
     width: 50,
-    backgroundColor: '#485a96',
+    backgroundColor: '#D9D9D9',
 
     borderColor: '#fff',
     height: 40,
@@ -90,7 +102,7 @@ const styles = StyleSheet.create({
   bttnConfig: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#485a96',
+    backgroundColor: '#D9D9D9',
     borderColor: '#fff',
     height: 40,
     width: 50,
@@ -100,7 +112,7 @@ const styles = StyleSheet.create({
   bttnTreino: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#485a96',
+    backgroundColor: '#D9D9D9',
     borderColor: '#fff',
     height: 40,
     width: 50,
@@ -108,7 +120,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 5,
   },
   separator: {
-    backgroundColor: '#fff',
+    backgroundColor: '#636363',
     width: 0.5,
     height: 40,
   },
@@ -130,5 +142,16 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     justifyContent: 'center',
     transform: [{rotate: '-20deg'}],
+  },
+  viewTreino: {
+    backgroundColor: '#D9D9D9',
+    marginHorizontal: 'auto',
+    justifyContent: 'flex-start',
+    borderRadius: 6,
+    height: 100,
+    width: 200,
+    alignItems: 'center',
+    flexDirection: 'column',
+    paddingVertical: 2,
   }
 });
