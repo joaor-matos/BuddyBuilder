@@ -3,7 +3,9 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { startTransition } from 'react';
-import Cronometro from './Cronometro';
+import Cronometro from './components/Cronometro';
+import Exercicio from './components/Exercicio';
+import Treino from './pages/Treino';
 
 function HomeScreen({ navigation }) {
   return (
@@ -17,7 +19,8 @@ function HomeScreen({ navigation }) {
         />
       </TouchableOpacity>
       <View style={styles.separator}/>
-      <TouchableOpacity style={styles.bttnTreino} activeOpacity={0.9}>
+      <TouchableOpacity style={styles.bttnTreino} activeOpacity={0.9}
+      onPress={() => navigation.navigate('Treino')}>
         <Image
         source={require('./images/treino.png')}
         style={styles.iconTreino}
@@ -29,7 +32,7 @@ function HomeScreen({ navigation }) {
       </View>
       <View style={styles.viewTreino}>
         <ScrollView style={styles.scrollTreino}>
-          <Exerc/>
+          <Exercicio/>
         </ScrollView>
     </View>
     <View style={{flexDirection: 'row', justifyContent: 'space-around', flex: 0.13,}}>
@@ -49,6 +52,14 @@ function ConfigScreen({ navigation }) {
   );
 }
 
+function TreinoScreen({ navigation }) {
+  return (
+    <View>
+      <Treino/>
+    </View>
+  );
+}
+
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -57,17 +68,11 @@ function App() {
       <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen options={{headerShown: false}} name='Home' component={HomeScreen}/>
         <Stack.Screen options={{headerShown: false}} name='Config' component={ConfigScreen}/>
+        <Stack.Screen options={{headerShown: false}} name='Treino' component={TreinoScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-export const Exerc = (props) => (
-    <View style={styles.viewExerc}>
-      <View style={styles.sepExerc} />
-      
-    </View>
-);
 
 export default App;
 
@@ -148,12 +153,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     justifyContent: 'center',
     borderRadius: 10,
-    width: 360,
+    width: 390,
     alignItems: 'center',
     flexDirection: 'column',
+    marginTop: -50,
   },
   viewExerc: {
-    marginTop: 10,
+    marginTop: 5,
     backgroundColor: '#636363',
     height: 70,
     width: 340,
