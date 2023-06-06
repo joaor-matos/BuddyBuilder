@@ -6,6 +6,8 @@ import { startTransition } from 'react';
 import Cronometro from './components/Cronometro';
 import Exercicio from './components/Exercicio';
 import Treino from './pages/Treino';
+import Temporizador from './components/Temporizador';
+import IMC from './components/IMC';
 
 function HomeScreen({ navigation }) {
   return (
@@ -36,7 +38,7 @@ function HomeScreen({ navigation }) {
         </ScrollView>
     </View>
     <View style={{flexDirection: 'row', justifyContent: 'space-around', flex: 0.13,}}>
-    <Cronometro/>
+    <Temporizador/>
     <Cronometro/>
     </View>
     </SafeAreaView>
@@ -46,8 +48,8 @@ function HomeScreen({ navigation }) {
 
 function ConfigScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Configuração</Text>
+    <View style={{ justifyContent: 'center', alignItems: 'center', padding: 50 }}>
+      <IMC/>
     </View>
   );
 }
@@ -171,11 +173,5 @@ const styles = StyleSheet.create({
     height: 70,
     marginLeft: 40,
   },
-  divExerc: {
-    backgroundColor: 'black',
-    width: 300,
-    height: 3,
-    marginTop: 30,
-    marginLeft: 40,
-  },
+
 });
