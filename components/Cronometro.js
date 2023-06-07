@@ -46,18 +46,20 @@ const Cronometro = () => {
   return (
     <View style={styles.container}>
       <View style={styles.viewCronometro}>
-      <Text style={styles.timerText}>
-        {formatTime(minutos)}:{formatTime(segundos)}
-      </Text>
+        <View style={{ backgroundColor: '#F0F0F0', height: 48, width: 140, borderRadius: 5, marginBottom: 5, }}>
+          <Text style={styles.timerText}>
+          {formatTime(minutos)}:{formatTime(segundos)}
+          </Text>
+        </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={startTimer}>
-          <Text style={styles.buttonText}>I</Text>
+          <Text style={styles.buttonText}>▶</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={stopTimer}>
-          <Text style={styles.buttonText}>P</Text>
+          <Text style={styles.buttonText}>║</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={resetTimer}>
-          <Text style={styles.buttonText}>R</Text>
+          <Text style={styles.buttonText}>⬤</Text>
         </TouchableOpacity>
         </View>
       </View>
@@ -72,10 +74,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   viewCronometro: {
-    backgroundColor: 'white',
+    backgroundColor: '#D9D9D9',
     height: 100,
     width: 150,
     borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   timerText: {
     fontSize: 30,
@@ -88,14 +92,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   button: {
-    backgroundColor: '#DDDDDD',
+    backgroundColor: '#F0F0F0',
     width: 40,
     height: 40,
     alignItems: 'center',
+    justifyContent: "center",
     marginHorizontal: 2,
   },
   buttonText: {
     fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

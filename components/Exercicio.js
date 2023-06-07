@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Touchable, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Touchable, TouchableHighlight, TouchableOpacity, SectionList } from 'react-native';
 
-const Exercicio = () => {
+
+
+const Exercicio = (props) => {
 
   const [isTextStriked, setTextStriked] = useState(false);
   const [isChecked, setChecked] = useState(false)
@@ -16,12 +18,13 @@ const Exercicio = () => {
             <TouchableOpacity onPress={handleButtonClick}>
               <View style={[styles.checkbox, isChecked && styles.checkboxCheck]}/>
             </TouchableOpacity>
-            <Text style={[styles.textExerc, isTextStriked && styles.strikedText]}>CADEIRA EXTENSORA + AGACHAMENTO DESLOCADO</Text>
-            <TouchableHighlight>
-              <View style={styles.info} />
-            </TouchableHighlight>
-        </View>
-        
+              <Text style={[styles.textExerc, isTextStriked && styles.strikedText]}>{props.nomeExerc}</Text>
+            {/*<TouchableHighlight>
+              <View style={styles.info}>
+                <Text>!</Text>
+              </View>
+            </TouchableHighlight>*/}
+      </View>
     )
 }
 
@@ -30,18 +33,15 @@ const styles = StyleSheet.create({
         width: 370,
         paddingHorizontal: 10,
         marginTop: 7,
-        backgroundColor: '#D9D9D9',
+        backgroundColor: '#f2f2f2',
         borderRadius: 10,
-        justifyContent: 'space-around',
         alignItems: 'center',
         flexDirection: 'row',
-        borderWidth: 2,
-        borderColor: 'gray',
       },
       textExerc: {
         fontWeight: 'bold',
         fontSize: 18,
-        alignSelf: 'center',
+        margin: 10,
       },
       textInfo: {
         fontWeight: 'bold',
@@ -74,6 +74,10 @@ const styles = StyleSheet.create({
           backgroundColor: 'white',
           width: 20,
           height: 20,
+          justifyContent: 'center',
+          alignItems: 'center',
+          elevation: 5,
+          alignSelf: 'flex-end',
       },
       strikedText: {
         textDecorationLine: 'line-through',

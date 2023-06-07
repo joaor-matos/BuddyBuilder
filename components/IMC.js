@@ -32,12 +32,12 @@ const IMC = () => {
      return (
          <View style={styles.container}>
             <Text style={{ fontWeight: 'bold', fontSize: 20, alignSelf: "center", marginBottom: 10, }}>Cálculo IMC</Text>
-             <TextInput style={styles.input} placeholder="Peso" onChangeText={text => setPeso(text)} value={peso} />
-             <TextInput style={styles.input} placeholder="Altura" onChangeText={text => setAltura(text)} value={altura}/>
+             <TextInput style={styles.input} placeholder="Peso" onChangeText={text => setPeso(text)} value={peso} keyboardType="numeric"/>
+             <TextInput style={styles.input} placeholder="Altura" onChangeText={text => setAltura(text)} value={altura} keyboardType="numeric"/>
              <TouchableOpacity style={styles.submit} onPress={calcularIMC}><Text style={{ alignSelf: "center", fontWeight: 'bold', fontSize: 20, }}>Calcular</Text></TouchableOpacity>
 
              {imc !== '' && (
-                 <Text>Seu IMC é: {imc} = {impressaoIMC}</Text>
+                 <Text style={{ alignSelf: "center", fontWeight: "bold", fontSize: 20, margin: 10, }}>Seu IMC é: {imc}</Text>
              )}
          </View>
      )
@@ -45,16 +45,17 @@ const IMC = () => {
 
  const styles = StyleSheet.create({
     container: {
+        backgroundColor: '#D9D9D9',
         padding: 10,
         borderWidth: 2,
         borderColor: 'black',
         borderRadius: 10,
-        width: 200,
+        width: 400,
         alignSelf: "center"
         
     },
     input: {
-        backgroundColor: 'gray',
+        backgroundColor: '#F0F0F0',
         borderRadius: 5,
         padding: 10,
         marginBottom: 10,

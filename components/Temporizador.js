@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, cloneElement } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet} from "react-native";
 
 const Temporizador = () => {
@@ -51,22 +51,24 @@ const Temporizador = () => {
   return (
     <View style={styles.container}>
       <View style={styles.viewTemp}>
-      <Text style={styles.timerText}>{formatTime(tempo)}</Text>
+        <View style={{ backgroundColor: '#F0F0F0', height: 48, width: 140, borderRadius: 5, marginTop: 5, }}>
+          <Text style={styles.timerText}>{formatTime(tempo)}</Text>
+        </View>
       <View style={styles.inputContainer}>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={startTimer}>
-          <Text style={styles.buttonText}>I</Text>
+          <Text style={styles.buttonText}>▶</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={stopTimer}>
-          <Text style={styles.buttonText}>P</Text>
+          <Text style={styles.buttonText}>║</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={resetTimer}>
-          <Text style={styles.buttonText}>R</Text>
+          <Text style={styles.buttonText}>⬤</Text>
         </TouchableOpacity>
       </View>
       <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-      <Text style={{ marginRight: 10, fontWeight:"bold" }}>Segundos:</Text>
+      <Text style={{ marginRight: 10, fontWeight:"bold" , justifyContent: "center", alignItems: "center", }}>Segundos:</Text>
         <TextInput
           style={styles.input}
           keyboardType="numeric"
@@ -84,17 +86,19 @@ const styles = StyleSheet.create({
     flex: 0.4,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 40,
   },
   viewInput: {
     flexDirection: "row",
 
   },
   viewTemp: {
-    backgroundColor: 'white',
-    height: 120,
+    backgroundColor: '#D9D9D9',
+    height: 140,
     width: 150,
     borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   timerText: {
     fontSize: 30,
@@ -107,14 +111,25 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   button: {
-    backgroundColor: '#DDDDDD',
+    backgroundColor: '#F0F0F0',
     width: 40,
     height: 40,
     alignItems: 'center',
+    justifyContent: "center",
     marginHorizontal: 2,
+    marginVertical: 5,
   },
   buttonText: {
     fontSize: 16,
+    fontWeight: "bold",
+  },
+  input: {
+    backgroundColor: '#F0F0F0',
+    borderRadius: 2,
+    padding: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: 2,
   },
 });
 
