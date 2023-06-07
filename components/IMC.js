@@ -7,7 +7,7 @@ const IMC = () => {
      const [peso, setPeso] = useState('');
      const [altura, setAltura] = useState('');
      const [imc, setIMC] = useState('');
-     let impressaoIMC;
+     const [impressaoIMC, setImpressaoIMC] = useState('')
 
      const calcularIMC = () => {
          const p = parseFloat(peso);
@@ -17,15 +17,15 @@ const IMC = () => {
         
 
          if (resultado < 18.5) {
-             impressaoIMC = "Está em situação de Magreza"
+             setImpressaoIMC("Está em situação de Magreza")
          } else if (resultado >= 18.5 && resultado <= 24.9) {
-             impressaoIMC = "Está no peso ideal"
+             setImpressaoIMC("Está no peso ideal")
          } else if (resultado >= 25 && resultado <= 29.9) {
-             impressaoIMC = "Está com sobrepeso"
+             setImpressaoIMC("Está com sobrepeso")
          } else if (resultado >= 30 && resultado <= 39.9) {
-             impressaoIMC = "Está com obesidade"
+             setImpressaoIMC("Está com obesidade")
          } else {
-             impressaoIMC = "Está com obesidade grave"
+             setImpressaoIMC("Está com obesidade grave")
          }
      }
 
@@ -33,11 +33,11 @@ const IMC = () => {
          <View style={styles.container}>
             <Text style={{ fontWeight: 'bold', fontSize: 20, alignSelf: "center", marginBottom: 10, }}>Cálculo IMC</Text>
              <TextInput style={styles.input} placeholder="Peso" onChangeText={text => setPeso(text)} value={peso} keyboardType="numeric"/>
-             <TextInput style={styles.input} placeholder="Altura" onChangeText={text => setAltura(text)} value={altura} keyboardType="numeric"/>
+             <TextInput style={styles.input} placeholder="Altura em cm" onChangeText={text => setAltura(text)} value={altura} keyboardType="numeric"/>
              <TouchableOpacity style={styles.submit} onPress={calcularIMC}><Text style={{ alignSelf: "center", fontWeight: 'bold', fontSize: 20, }}>Calcular</Text></TouchableOpacity>
 
              {imc !== '' && (
-                 <Text style={{ alignSelf: "center", fontWeight: "bold", fontSize: 20, margin: 10, }}>Seu IMC é: {imc}</Text>
+                 <Text style={{ alignSelf: "center", fontWeight: "bold", fontSize: 20, margin: 10, }}>Seu IMC é: {imc} {"\n"} {impressaoIMC}</Text>
              )}
          </View>
      )
