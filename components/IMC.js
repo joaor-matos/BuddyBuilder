@@ -18,11 +18,11 @@ const IMC = () => {
 
          if (resultado < 18.5) {
              setImpressaoIMC("Está em situação de Magreza")
-         } else if (resultado >= 18.5 && resultado <= 24.9) {
+         } else if (resultado >= 18.5 && resultado <= 24.99) {
              setImpressaoIMC("Está no peso ideal")
-         } else if (resultado >= 25 && resultado <= 29.9) {
+         } else if (resultado >= 25 && resultado <= 29.99) {
              setImpressaoIMC("Está com sobrepeso")
-         } else if (resultado >= 30 && resultado <= 39.9) {
+         } else if (resultado >= 30 && resultado <= 39.99) {
              setImpressaoIMC("Está com obesidade")
          } else {
              setImpressaoIMC("Está com obesidade grave")
