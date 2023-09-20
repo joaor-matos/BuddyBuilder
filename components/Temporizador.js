@@ -1,22 +1,22 @@
-import { useState, useEffect, cloneElement } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, TextInput, TouchableOpacity, Text, StyleSheet } from "react-native";
 
 const Temporizador = () => {
   const [tempo, setTempo] = useState(0);
-  const [tempoDefinido, setTempoDefinido] = useState(0);
+  const [tempoDefinido, setTempoDefinido] = useState("0:00");
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
     let intervalId;
 
-    if (isRunning) {
+    if (isRunning && tempo > 0) {
       intervalId = setInterval(() => {
         setTempo((tempo) => tempo - 1);
       }, 1000);
     }
 
     return () => clearInterval(intervalId);
-  }, [isRunning]);
+  }, [isRunning, tempo]);
 
   const formatTime = (value) => {
     const minutes = Math.floor(value / 60);
@@ -26,12 +26,17 @@ const Temporizador = () => {
   };
 
   const formatValue = (value) => {
-    return value < 10 ? `0${value}` : value;
+    return value < 10 ? `0${value}` : value.toString();
   };
 
   const startTimer = () => {
-    setTempo(tempoDefinido);
-    setIsRunning(true);
+    const [minutes, seconds] = tempoDefinido.split(":").map(Number);
+    const totalSeconds = minutes * 60 + seconds;
+    
+    if (!isNaN(totalSeconds) && totalSeconds > 0) {
+      setTempo(totalSeconds);
+      setIsRunning(true);
+    }
   };
 
   const stopTimer = () => {
@@ -41,11 +46,7 @@ const Temporizador = () => {
   const resetTimer = () => {
     setTempo(0);
     setIsRunning(false);
-  };
-
-  const handleTempoDefinidoChange = (text) => {
-    const tempoDefinido = parseInt(text);
-    setTempoDefinido(isNaN(tempoDefinido) ? 0 : tempoDefinido);
+    setTempoDefinido("0:00");
   };
 
   return (
@@ -54,29 +55,25 @@ const Temporizador = () => {
         <View style={{ backgroundColor: '#F0F0F0', height: 48, width: 140, borderRadius: 5, marginTop: 5, }}>
           <Text style={styles.timerText}>{formatTime(tempo)}</Text>
         </View>
-      <View style={styles.inputContainer}>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={startTimer}>
-          <Text style={styles.buttonText}>▶</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={stopTimer}>
-          <Text style={styles.buttonText}>║</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={resetTimer}>
-          <Text style={styles.buttonText}>⬤</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-      <Text style={{ marginRight: 10, fontWeight:"bold" , justifyContent: "center", alignItems: "center", }}>Segundos:</Text>
         <TextInput
           style={styles.input}
           keyboardType="numeric"
-          value={tempoDefinido.toString()}
-          onChangeText={handleTempoDefinidoChange}
+          value={tempoDefinido}
+          onChangeText={(text) => setTempoDefinido(text)}
+          placeholder="Min:Sec"
         />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={startTimer}>
+            <Text style={styles.buttonText}>▶</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={stopTimer}>
+            <Text style={styles.buttonText}>║</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={resetTimer}>
+            <Text style={styles.buttonText}>⬤</Text>
+          </TouchableOpacity>
         </View>
-        </View>
+      </View>
     </View>
   );
 };
@@ -87,10 +84,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
-  },
-  viewInput: {
-    flexDirection: "row",
-
   },
   viewTemp: {
     backgroundColor: '#D9D9D9',
@@ -130,6 +123,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 2,
+    fontSize: 20,
+    width: 80,
   },
 });
 
