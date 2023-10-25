@@ -13,14 +13,14 @@ import IMC from './components/IMC';
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login';
 import CriarTreino from './pages/CriarTreino';
-
+import Configuracao from './pages/Configuracao'
 
 function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#242424', flexDirection: 'column' }}>
       <View style={styles.menu}>
       <TouchableOpacity style={styles.bttnTreino} activeOpacity={0.9}
-      onPress={() => navigation.navigate('CriarTreino')}>
+      onPress={() => navigation.navigate('Configuracao')}>
         <Image
         source={require('./images/treino.png')}
         style={styles.iconTreino}
@@ -56,7 +56,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='HomeScreen'>
         <Stack.Screen options={{headerShown: false}} name='Home' component={HomeScreen}/>
-        <Stack.Screen options={{headerShown: true}} name='CriarTreino' component={CriarTreino}/>
+        <Stack.Screen options={{headerShown: true}} name='Configuracao' component={Configuracao}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
