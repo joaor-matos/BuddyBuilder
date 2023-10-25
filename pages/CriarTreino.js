@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
 
-export default function CriarTrieno() {
+export default function CriarTrieno({ navigation }) {
     const [nomeTreino, setNomeTreino] = useState("");
     const [exercicio, setExercicio] = useState("");
     const [quantRepeticao, setQuantRepeticao] = useState(0);

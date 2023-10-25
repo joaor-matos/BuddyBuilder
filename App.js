@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { cloneElement, startTransition } from 'react';
+import AsyncStorage  from '@react-native-async-storage/async-storage';
+
 import Cronometro from './components/Cronometro';
 import Exercicio from './components/Exercicio';
 import Treino from './pages/Treino';
@@ -10,13 +12,15 @@ import Temporizador from './components/Temporizador';
 import IMC from './components/IMC';
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login';
+import CriarTreino from './pages/CriarTreino';
+
 
 function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#242424', flexDirection: 'column' }}>
       <View style={styles.menu}>
       <TouchableOpacity style={styles.bttnTreino} activeOpacity={0.9}
-      onPress={() => navigation.navigate('Treino')}>
+      onPress={() => navigation.navigate('CriarTreino')}>
         <Image
         source={require('./images/treino.png')}
         style={styles.iconTreino}
@@ -45,68 +49,14 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function TreinoScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#242424' }}>
-      <IMC/>
-    </View>
-  );
-}
-
-function LoginScreen({ navigation }) {
-  return (
-    <View style={{ padding: 40, alignItems: "center", justifyContent: "center", flex: 1, backgroundColor: '#242424', }} /*style={styles.container}*/>
-      {/* <TextInput style={styles.inputEmail} placeholder="E-mail" onChangeText={(text) => setEmail(text)} value={email} /> */}
-      <TextInput style={styles.input} placeholder="E-mail" />
-      {/* <TextInput style={styles.inputPassword} placeholder="Senha" onChangeText={(text) => setPassword(text)} value={password} /> */}
-      <TextInput style={styles.input} placeholder="Senha" />
-     
-      <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Home')}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Login</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-        <Text style={{ fontSize: 15, fontWeight: "bold", marginTop: 20, color: '#9ebdff', textDecorationLine: 'underline' }}>Cadastrar-se</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
-
-function CadastroScreen({ navigation }) {
-  return (
-      <View style={{ padding: 40, alignItems: "center", justifyContent: "center", flex: 1, backgroundColor: '#242424', }}>
-          {/* <TextInput style={styles.nicknameInput} placeholder="Apelido" onChangeText={text => setNickname(text)} value={nickname} /> */}
-          <TextInput style={styles.input} placeholder="Apelido"/>
-
-          {/* <TextInput style={styles.emailInput} placeholder="E-mail" onChangeText={text => setEmail(text)} value={email} /> */}
-          <TextInput style={styles.input} placeholder="E-mail"/>
-
-          {/* <TextInput placeholder="Senha" onChangeText={text => setPassword(text)} value={password} /> */}
-          <TextInput style={styles.input} placeholder="Senha"/>
-
-          {/* <TextInput style={styles.confirmPasswordInput} placeholder="Confirmar senha" onChangeText={text => setConfirmPassWord(text)} value={confirmPassword} /> */}
-          <TextInput style={styles.input} placeholder="Confirmar senha"/>
-
-          <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Home')}><Text style={{ fontSize: 20, fontWeight: "bold" }}>Concluir cadastro</Text></TouchableOpacity>
-
-          <TouchableOpacity
-              title="Login" onPress={() => navigation.navigate('Login')} >
-              <Text style={{ fontSize: 15, fontWeight: "bold", marginTop: 20, color: '#9ebdff', textDecorationLine: 'underline' }}>Fazer Login</Text>
-          </TouchableOpacity>
-      </View>
-  )
-}
-
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
+      <Stack.Navigator initialRouteName='HomeScreen'>
         <Stack.Screen options={{headerShown: false}} name='Home' component={HomeScreen}/>
-        <Stack.Screen options={{headerShown: false}} name='Treino' component={TreinoScreen}/>
-        <Stack.Screen options={{headerShown: false}} name='Login' component={LoginScreen}/>
-        <Stack.Screen options={{headerShown: false}} name='Cadastro' component={CadastroScreen}/>
+        <Stack.Screen options={{headerShown: true}} name='CriarTreino' component={CriarTreino}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
