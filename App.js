@@ -1,19 +1,24 @@
+//Elementos
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, ScrollView, ImageBackground, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { cloneElement, startTransition } from 'react';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
+import { HiMenu } from "react-icons/hi";
 
+// Componentes
 import Cronometro from './components/Cronometro';
 import Exercicio from './components/Exercicio';
-import Treino from './pages/Treino';
 import Temporizador from './components/Temporizador';
 import IMC from './components/IMC';
+
+//Páginas
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login';
 import CriarTreino from './pages/CriarTreino';
-import Configuracao from './pages/Configuracao'
+import Configuracao from './pages/Configuracao';
+import Treino from './pages/Treino';
 
 function HomeScreen({ navigation }) {
   return (
@@ -21,10 +26,11 @@ function HomeScreen({ navigation }) {
       <View style={styles.menu}>
       <TouchableOpacity style={styles.bttnTreino} activeOpacity={0.9}
       onPress={() => navigation.navigate('Configuracao')}>
-        <Image
+        {/* <Image
         source={require('./images/treino.png')}
         style={styles.iconTreino}
-        />
+        /> */}
+        <HiMenu style={styles.iconConfig} size={70} />
       </TouchableOpacity>
 
       <StatusBar style="auto" />
@@ -101,12 +107,11 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 5,
   },
   bttnTreino: {
-    flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#D9D9D9',
     borderColor: '#fff',
     height: 70,
-    width: 100,
+    width: 70,
     borderRadius: 5,
 
   },
@@ -124,15 +129,12 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     justifyContent: 'center',
   },
-  iconTreino: {
-    padding: 15,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    height: 50,
-    width: 50,
+  iconConfig: {
+    padding: 1,
+    margin: 'auto',
     resizeMode: 'stretch',
     justifyContent: 'center',
-    transform: [{rotate: '-20deg'}],
+    color: '707070',
   },
   viewTreino: {
     flex: 0.3,
