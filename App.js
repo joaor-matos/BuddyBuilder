@@ -4,8 +4,7 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { cloneElement, startTransition } from 'react';
-import AsyncStorage  from '@react-native-async-storage/async-storage';
-import { HiMenu } from "react-icons/hi";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Componentes
 import Cronometro from './components/Cronometro';
@@ -22,34 +21,33 @@ import Treino from './pages/Treino';
 
 function HomeScreen({ navigation }) {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#242424', flexDirection: 'column' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#242424', flexDirection: 'column' }}>
       <View style={styles.menu}>
-      <TouchableOpacity style={styles.bttnTreino} activeOpacity={0.9}
-      onPress={() => navigation.navigate('Configuracao')}>
-        {/* <Image
-        source={require('./images/treino.png')}
-        style={styles.iconTreino}
-        /> */}
-        <HiMenu style={styles.iconConfig} size={70} />
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+          onPress={() => navigation.navigate('Configuracao')}>
+            <Image
+          source={require('./images/menu.png')}
+          style={styles.iconMenu}
+          />
+        </TouchableOpacity>
 
-      <StatusBar style="auto" />
+        <StatusBar style="auto" />
 
       </View>
       <View style={styles.viewTreino}>
         <ScrollView style={styles.scrollTreino}>
-          <Exercicio nomeExerc='ESTEIRA'/>
-          <Exercicio nomeExerc='AGACHAMENTO BARRA'/>
-          <Exercicio nomeExerc='ELEVAÇÃO PÉLVICA'/>
-          <Exercicio nomeExerc='CADEIRA EXTENSORA + AGACHAMENTO DESLOCADO'/>
-          <Exercicio nomeExerc='CADEIRA FLEXORA'/>
-          <Exercicio nomeExerc='PANTURRILHA BURRINHO'/>
+          <Exercicio nomeExerc='ESTEIRA' />
+          <Exercicio nomeExerc='AGACHAMENTO BARRA' />
+          <Exercicio nomeExerc='ELEVAÇÃO PÉLVICA' />
+          <Exercicio nomeExerc='CADEIRA EXTENSORA + AGACHAMENTO DESLOCADO' />
+          <Exercicio nomeExerc='CADEIRA FLEXORA' />
+          <Exercicio nomeExerc='PANTURRILHA BURRINHO' />
         </ScrollView>
-    </View>
-    <View style={{flexDirection: 'row', justifyContent: 'space-around', flex: 0.13,}}>
-    <Temporizador/>
-    <Cronometro/>
-    </View>
+      </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 0.13, }}>
+        <Temporizador />
+        <Cronometro />
+      </View>
     </SafeAreaView>
 
   );
@@ -59,12 +57,12 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='HomeScreen'>
-        <Stack.Screen options={{headerShown: false}} name='Home' component={HomeScreen}/>
-        <Stack.Screen options={{headerShown: true}} name='Configuracao' component={Configuracao}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName='HomeScreen'>
+            <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
+            <Stack.Screen options={{ headerShown: true }} name='Configuracao' component={Configuracao} />
+          </Stack.Navigator>
+        </NavigationContainer>
   );
 }
 
@@ -75,8 +73,9 @@ const styles = StyleSheet.create({
     flex: 0.2,
     alignItems: 'center',
     backgroundColor: '#242424',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     flexDirection: 'row',
+    padding: 10,
   },
   navegar: {
     flexDirection: 'row',
@@ -106,14 +105,21 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
   },
-  bttnTreino: {
+  bttnMenu: {
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#D9D9D9',
     borderColor: '#fff',
     height: 70,
     width: 70,
     borderRadius: 5,
-
+  },
+  iconMenu: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 60,
+    width: 60,
+    borderRadius: 5,
   },
   separator: {
     backgroundColor: '#636363',
@@ -129,13 +135,7 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     justifyContent: 'center',
   },
-  iconConfig: {
-    padding: 1,
-    margin: 'auto',
-    resizeMode: 'stretch',
-    justifyContent: 'center',
-    color: '707070',
-  },
+
   viewTreino: {
     flex: 0.3,
     alignSelf: 'center',
@@ -160,28 +160,28 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-   },
-   input: {
-     width: 200,
-     height: 40,
-     borderRadius: 5,
-     backgroundColor: '#F0F0F0',
-     elevation: 2,
-     alignItems: "center",
-     justifyContent: "center",
-     paddingHorizontal: 10,
-     marginTop: 10,
-     fontSize: 20,
-   },
-   btn: {
-     width: 200,
-     height: 40,
-     borderRadius: 8,
-     alignItems: "center",
-     backgroundColor: '#D9D9D9',
-     color: "black",
-     justifyContent: "center",
-     elevation: 2,
-     marginTop: 10,
-   },
+  },
+  input: {
+    width: 200,
+    height: 40,
+    borderRadius: 5,
+    backgroundColor: '#F0F0F0',
+    elevation: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 10,
+    marginTop: 10,
+    fontSize: 20,
+  },
+  btn: {
+    width: 200,
+    height: 40,
+    borderRadius: 8,
+    alignItems: "center",
+    backgroundColor: '#D9D9D9',
+    color: "black",
+    justifyContent: "center",
+    elevation: 2,
+    marginTop: 10,
+  },
 });

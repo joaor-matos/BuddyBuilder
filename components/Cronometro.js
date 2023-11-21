@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 
 const Cronometro = () => {
   const [segundos, setSegundos] = useState(0);
@@ -53,13 +54,13 @@ const Cronometro = () => {
         </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={startTimer}>
-          <Text style={styles.buttonText}>▶</Text>
+        <AntDesign name="caretright" size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={stopTimer}>
-          <Text style={styles.buttonText}>║</Text>
+        <AntDesign name="pause" size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={resetTimer}>
-          <Text style={styles.buttonText}>⬤</Text>
+        <Entypo name="ccw" size={24} color="black" />
         </TouchableOpacity>
         </View>
       </View>
