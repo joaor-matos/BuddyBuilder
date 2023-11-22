@@ -11,7 +11,7 @@ function Configuracao({ navigation }) {
         <View style={styles.container}>
             <View style={styles.conta}>
                 <Text style={styles.text}>Perfil</Text>
-                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 18, fontWeight: 700}}>Usuário</Text>
+                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 18, fontWeight: 700}}>Apelido</Text>
                 
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('CalculoIMC')}><Text style={{fontSize: 18, fontWeight: 700}}>Calculo IMC</Text></TouchableOpacity>
