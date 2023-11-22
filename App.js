@@ -16,8 +16,8 @@ import IMC from './components/IMC';
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login';
 import CriarTreino from './pages/CriarTreino';
-import Configuracao from './pages/Configuracao';
-import Treino from './pages/Treino';
+import ConfigScreen from './pages/Configuracao';
+import CalculoIMC from './pages/CalculoIMC';
 
 function HomeScreen({ navigation }) {
   return (
@@ -53,14 +53,24 @@ function HomeScreen({ navigation }) {
   );
 }
 
+function IMCScreen({ navigation }) {
+  return (
+    <View style={{ justifyContent: 'center', alignItems: 'center', padding: 50 }}>
+        <IMC />
+    </View>
+  )
+}
+
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='HomeScreen'>
+          <Stack.Navigator initialRouteName='Treino'>
             <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
-            <Stack.Screen options={{ headerShown: true }} name='Configuracao' component={Configuracao} />
+            <Stack.Screen options={{ headerShown: true }} name='Configuracao' component={ConfigScreen} />
+            <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
+            <Stack.Screen options={{ headerShown: true }} name='Treino' component={CriarTreino} />
           </Stack.Navigator>
         </NavigationContainer>
   );
