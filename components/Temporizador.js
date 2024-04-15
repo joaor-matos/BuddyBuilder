@@ -81,10 +81,8 @@ const Temporizador = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.4,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
   },
   viewTemp: {
     backgroundColor: '#D9D9D9',

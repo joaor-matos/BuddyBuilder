@@ -22,8 +22,18 @@ import ConfigUsuario from './pages/ConfigUsuario';
 
 function HomeScreen({ navigation }) {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#242424', flexDirection: 'column' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
       <View style={styles.menu}>
+        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+          onPress={() => navigation.navigate('Configuracao')}>
+            <View style={{ backgroundColor: '#AB0000', height: '60%', width: '60%', borderRadius: 6, }}/>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.timerTreino} activeOpacity={0.9}
+          onPress={() => navigation.navigate('Configuracao')}>
+            <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>1:12:43</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
           onPress={() => navigation.navigate('Configuracao')}>
             <Image
@@ -45,12 +55,13 @@ function HomeScreen({ navigation }) {
           <Exercicio nomeExerc='PANTURRILHA BURRINHO' />
         </ScrollView>
       </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 0.13, }}>
+      
+      <View style={{ flexDirection: 'column', justifyContent: 'space-between',  }}>
         <Temporizador />
         <Cronometro />
       </View>
+    
     </SafeAreaView>
-
   );
 }
 
@@ -67,13 +78,14 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='Login'>
+          <Stack.Navigator initialRouteName='Home'>
             <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
             <Stack.Screen options={{ headerShown: true }} name='Configuracao' component={ConfigScreen} />
             <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
             <Stack.Screen options={{ headerShown: true }} name='Treino' component={CriarTreino} />
             <Stack.Screen options={{ headerShown: true }} name='ConfigUsuario' component={ConfigUsuario} />
             <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
+            <Stack.Screen options={{ headerShown: false }} name='Cadastro' component={Cadastro} />
           </Stack.Navigator>
         </NavigationContainer>
   );
@@ -83,10 +95,10 @@ export default App;
 
 const styles = StyleSheet.create({
   menu: {
-    flex: 0.2,
+    marginTop: 40,
     alignItems: 'center',
-    backgroundColor: '#242424',
-    justifyContent: 'flex-end',
+    backgroundColor: '#182649',
+    justifyContent: 'space-around',
     flexDirection: 'row',
     padding: 10,
   },
@@ -125,8 +137,18 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     height: 70,
     width: 70,
-    borderRadius: 5,
+    borderRadius: 10,
   },
+
+  timerTreino: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#D9D9D9',
+    borderColor: '#fff',
+    height: 70,
+    borderRadius: 10,
+  },
+  
   iconMenu: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -150,7 +172,7 @@ const styles = StyleSheet.create({
   },
 
   viewTreino: {
-    flex: 0.3,
+
     alignSelf: 'center',
     backgroundColor: '#D9D9D9',
     marginHorizontal: 'auto',
@@ -159,7 +181,6 @@ const styles = StyleSheet.create({
     width: 390,
     alignItems: 'center',
     flexDirection: 'column',
-    marginTop: -50,
   },
   viewExerc: {
     marginTop: 5,

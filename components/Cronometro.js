@@ -70,14 +70,13 @@ const Cronometro = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.4,
     alignItems: 'center',
     justifyContent: 'center',
   },
   viewCronometro: {
     backgroundColor: '#D9D9D9',
-    height: 100,
-    width: 150,
+    height: 180,
+    width: 300,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center'
