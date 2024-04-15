@@ -1,7 +1,5 @@
-import React, { useState, } from "react";
-import { TextInput, Text, View, TouchableOpacity, StyleSheet } from "react-native";
-
-
+import { useState } from "react";
+import { TextInput, Text, View, TouchableOpacity, StyleSheet  } from "react-native";
 
 const IMC = () => {
     const [peso, setPeso] = useState('');

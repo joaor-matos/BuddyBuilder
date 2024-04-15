@@ -1,4 +1,4 @@
-import React, { cloneElement, useState } from 'react';
+import { cloneElement, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 

@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 const SignUpScreen = () => {
@@ -41,93 +41,93 @@ function CadastroScreen() {
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#F5F5F5",
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    nicknameInput: {
-        width: 191,
-        height: 26,
-        top: 143,
-        left: 31,
-        borderRadius: 5,
-    },
-    emailInput: {
-        width: 191,
-        height: 26,
-        top: 213,
-        left: 31,
-        borderRadius: 5,
-    },
-    passwordInput: {
-        width: 191,
-        height: 26,
-        top: 283,
-        left: 31,
-        borderRadius: 5,
-    },
-    confirmPasswordInput: {
-        width: 191,
-        height: 36,
-        top: 353,
-        left: 31,
-        borderRadius: 5,
-    },
-    btnCadastro: {
-        width: 191,
-        height: 36,
-        top: 403,
-        left: 44,
-        borderRadius: 8
-    },
-    textNickname: {
-        fontSize: 14,
-        fontFamily: 'Inter',
-        fontWeight: 400,
-        width: 50,
-        height: 17,
-        top: 123,
-        left: 31,
-    },
-    textEmail: {
-        fontFamily: 'Inter',
-        fontSize: 14,
-        fontWeight: 400,
-        width: 42,
-        height: 17,
-        top: 193,
-        left: 31,
-    },
-    textPassword: {
-        fontFamily: 'Inter',
-        fontSize: 14,
-        fontWeight: 400,
-        width: 42,
-        height: 17,
-        top: 263,
-        left: 31,
-    },
-    textConfirm: {
-        fontFamily: 'Inter',
-        fontSize: 14,
-        fontWeight: 400,
-        width: 111,
-        height: 17,
-        top: 333,
-        left: 31,
-    },
-    textCadastro: {
-        width: 122,
-        height: 17,
-        top: 413,
-        left: 65,
-        fontFamily: 'Inter',
-        fontSize: 14,
-        fontWeight: 700,
-    }
-})
+ const styles = StyleSheet.create({
+     container: {
+         flex: 1,
+         backgroundColor: "#F5F5F5",
+         alignItems: 'center',
+         justifyContent: 'center',
+     },
+     nicknameInput: {
+         width: 191,
+         height: 26,
+         top: 143,
+         left: 31,
+         borderRadius: 5,
+     },
+     emailInput: {
+         width: 191,
+         height: 26,
+         top: 213,
+         left: 31,
+         borderRadius: 5,
+     },
+     passwordInput: {
+         width: 191,
+         height: 26,
+         top: 283,
+         left: 31,
+         borderRadius: 5,
+     },
+     confirmPasswordInput: {
+         width: 191,
+         height: 36,
+         top: 353,
+         left: 31,
+         borderRadius: 5,
+     },
+     btnCadastro: {
+         width: 191,
+         height: 36,
+         top: 403,
+         left: 44,
+         borderRadius: 8
+     },
+     textNickname: {
+         fontSize: 14,
+         fontFamily: 'Inter',
+         fontWeight: "400",
+         width: 50,
+         height: 17,
+         top: 123,
+         left: 31,
+     },
+     textEmail: {
+         fontFamily: 'Inter',
+         fontSize: 14,
+         fontWeight: "400",
+         width: 42,
+         height: 17,
+         top: 193,
+         left: 31,
+     },
+     textPassword: {
+       fontFamily: 'Inter',
+       fontSize: 14,
+       fontWeight: "400",
+       width: 42,
+       height: 17,
+       top: 263,
+       left: 31,
+   },
+   textConfirm: {
+       fontFamily: 'Inter',
+       fontSize: 14,
+       fontWeight: "400",
+       width: 111,
+       height: 17,
+       top: 333,
+       left: 31,
+   },
+   textCadastro: {
+       width: 122,
+       height: 17,
+       top: 413,
+       left: 65,
+       fontFamily: 'Inter',
+       fontSize: 14,
+       fontWeight: "700",
+     }
+ })
 
 export default CadastroScreen;
