@@ -78,7 +78,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='Treino'>
+          <Stack.Navigator initialRouteName='Home'>
             <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
             <Stack.Screen options={{ headerShown: true }} name='Configuracao' component={ConfigScreen} />
             <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
