@@ -1,99 +1,75 @@
+//Elementos
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, ScrollView, ImageBackground, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { cloneElement, startTransition } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Componentes
 import Cronometro from './components/Cronometro';
 import Exercicio from './components/Exercicio';
-import Treino from './pages/Treino';
 import Temporizador from './components/Temporizador';
 import IMC from './components/IMC';
+
+//Páginas
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login';
+import CriarTreino from './pages/CriarTreino';
+import ConfigScreen from './pages/Configuracao';
+import CalculoIMC from './pages/CalculoIMC';
+import ConfigUsuario from './pages/ConfigUsuario';
 
 function HomeScreen({ navigation }) {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#242424', flexDirection: 'column' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
       <View style={styles.menu}>
-      <TouchableOpacity style={styles.bttnTreino} activeOpacity={0.9}
-      onPress={() => navigation.navigate('Treino')}>
-        <Image
-        source={require('./images/treino.png')}
-        style={styles.iconTreino}
-        />
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+          onPress={() => navigation.navigate('Configuracao')}>
+            <View style={{ backgroundColor: '#AB0000', height: '60%', width: '60%', borderRadius: 6, }}/>
+        </TouchableOpacity>
 
-      <StatusBar style="auto" />
+        <TouchableOpacity style={styles.timerTreino} activeOpacity={0.9}
+          onPress={() => navigation.navigate('Configuracao')}>
+            <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>1:12:43</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+          onPress={() => navigation.navigate('Configuracao')}>
+            <Image
+          source={require('./images/menu.png')}
+          style={styles.iconMenu}
+          />
+        </TouchableOpacity>
+
+        <StatusBar style="auto" />
 
       </View>
       <View style={styles.viewTreino}>
         <ScrollView style={styles.scrollTreino}>
-          <Exercicio nomeExerc='ESTEIRA'/>
-          <Exercicio nomeExerc='AGACHAMENTO BARRA'/>
-          <Exercicio nomeExerc='ELEVAÇÃO PÉLVICA'/>
-          <Exercicio nomeExerc='CADEIRA EXTENSORA + AGACHAMENTO DESLOCADO'/>
-          <Exercicio nomeExerc='CADEIRA FLEXORA'/>
-          <Exercicio nomeExerc='PANTURRILHA BURRINHO'/>
+          <Exercicio nomeExerc='ESTEIRA' />
+          <Exercicio nomeExerc='AGACHAMENTO BARRA' />
+          <Exercicio nomeExerc='ELEVAÇÃO PÉLVICA' />
+          <Exercicio nomeExerc='CADEIRA EXTENSORA + AGACHAMENTO DESLOCADO' />
+          <Exercicio nomeExerc='CADEIRA FLEXORA' />
+          <Exercicio nomeExerc='PANTURRILHA BURRINHO' />
         </ScrollView>
-    </View>
-    <View style={{flexDirection: 'row', justifyContent: 'space-around', flex: 0.13,}}>
-    <Temporizador/>
-    <Cronometro/>
-    </View>
-    </SafeAreaView>
-
-  );
-}
-
-function TreinoScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#242424' }}>
-      <IMC/>
-    </View>
-  );
-}
-
-function LoginScreen({ navigation }) {
-  return (
-    <View style={{ padding: 40, alignItems: "center", justifyContent: "center", flex: 1, backgroundColor: '#242424', }} /*style={styles.container}*/>
-      {/* <TextInput style={styles.inputEmail} placeholder="E-mail" onChangeText={(text) => setEmail(text)} value={email} /> */}
-      <TextInput style={styles.input} placeholder="E-mail" />
-      {/* <TextInput style={styles.inputPassword} placeholder="Senha" onChangeText={(text) => setPassword(text)} value={password} /> */}
-      <TextInput style={styles.input} placeholder="Senha" />
-     
-      <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Home')}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Login</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-        <Text style={{ fontSize: 15, fontWeight: "bold", marginTop: 20, color: '#9ebdff', textDecorationLine: 'underline' }}>Cadastrar-se</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
-
-function CadastroScreen({ navigation }) {
-  return (
-      <View style={{ padding: 40, alignItems: "center", justifyContent: "center", flex: 1, backgroundColor: '#242424', }}>
-          {/* <TextInput style={styles.nicknameInput} placeholder="Apelido" onChangeText={text => setNickname(text)} value={nickname} /> */}
-          <TextInput style={styles.input} placeholder="Apelido"/>
-
-          {/* <TextInput style={styles.emailInput} placeholder="E-mail" onChangeText={text => setEmail(text)} value={email} /> */}
-          <TextInput style={styles.input} placeholder="E-mail"/>
-
-          {/* <TextInput placeholder="Senha" onChangeText={text => setPassword(text)} value={password} /> */}
-          <TextInput style={styles.input} placeholder="Senha"/>
-
-          {/* <TextInput style={styles.confirmPasswordInput} placeholder="Confirmar senha" onChangeText={text => setConfirmPassWord(text)} value={confirmPassword} /> */}
-          <TextInput style={styles.input} placeholder="Confirmar senha"/>
-
-          <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Home')}><Text style={{ fontSize: 20, fontWeight: "bold" }}>Concluir cadastro</Text></TouchableOpacity>
-
-          <TouchableOpacity
-              title="Login" onPress={() => navigation.navigate('Login')} >
-              <Text style={{ fontSize: 15, fontWeight: "bold", marginTop: 20, color: '#9ebdff', textDecorationLine: 'underline' }}>Fazer Login</Text>
-          </TouchableOpacity>
       </View>
+      
+      <View style={{ flexDirection: 'column', justifyContent: 'space-between',  }}>
+        <Temporizador />
+        <Cronometro />
+      </View>
+    
+    </SafeAreaView>
+  );
+}
+
+function IMCScreen({ navigation }) {
+  return (
+    <View style={{ justifyContent: 'center', alignItems: 'center', padding: 50 }}>
+        <IMC />
+    </View>
   )
 }
 
@@ -101,14 +77,17 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen options={{headerShown: false}} name='Home' component={HomeScreen}/>
-        <Stack.Screen options={{headerShown: false}} name='Treino' component={TreinoScreen}/>
-        <Stack.Screen options={{headerShown: false}} name='Login' component={LoginScreen}/>
-        <Stack.Screen options={{headerShown: false}} name='Cadastro' component={CadastroScreen}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName='Home'>
+            <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
+            <Stack.Screen options={{ headerShown: true }} name='Configuracao' component={ConfigScreen} />
+            <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
+            <Stack.Screen options={{ headerShown: true }} name='Treino' component={CriarTreino} />
+            <Stack.Screen options={{ headerShown: true }} name='ConfigUsuario' component={ConfigUsuario} />
+            <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
+            <Stack.Screen options={{ headerShown: false }} name='Cadastro' component={Cadastro} />
+          </Stack.Navigator>
+        </NavigationContainer>
   );
 }
 
@@ -116,11 +95,12 @@ export default App;
 
 const styles = StyleSheet.create({
   menu: {
-    flex: 0.2,
+    marginTop: 40,
     alignItems: 'center',
-    backgroundColor: '#242424',
-    justifyContent: 'center',
+    backgroundColor: '#182649',
+    justifyContent: 'space-around',
     flexDirection: 'row',
+    padding: 10,
   },
   navegar: {
     flexDirection: 'row',
@@ -150,15 +130,31 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
   },
-  bttnTreino: {
-    flexDirection: 'row',
+  bttnMenu: {
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#D9D9D9',
     borderColor: '#fff',
     height: 70,
-    width: 100,
-    borderRadius: 5,
+    width: 70,
+    borderRadius: 10,
+  },
 
+  timerTreino: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#D9D9D9',
+    borderColor: '#fff',
+    height: 70,
+    borderRadius: 10,
+  },
+  
+  iconMenu: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 60,
+    width: 60,
+    borderRadius: 5,
   },
   separator: {
     backgroundColor: '#636363',
@@ -174,18 +170,9 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     justifyContent: 'center',
   },
-  iconTreino: {
-    padding: 15,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    height: 50,
-    width: 50,
-    resizeMode: 'stretch',
-    justifyContent: 'center',
-    transform: [{rotate: '-20deg'}],
-  },
+
   viewTreino: {
-    flex: 0.3,
+
     alignSelf: 'center',
     backgroundColor: '#D9D9D9',
     marginHorizontal: 'auto',
@@ -194,7 +181,6 @@ const styles = StyleSheet.create({
     width: 390,
     alignItems: 'center',
     flexDirection: 'column',
-    marginTop: -50,
   },
   viewExerc: {
     marginTop: 5,
@@ -208,28 +194,28 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-   },
-   input: {
-     width: 200,
-     height: 40,
-     borderRadius: 5,
-     backgroundColor: '#F0F0F0',
-     elevation: 2,
-     alignItems: "center",
-     justifyContent: "center",
-     paddingHorizontal: 10,
-     marginTop: 10,
-     fontSize: 20,
-   },
-   btn: {
-     width: 200,
-     height: 40,
-     borderRadius: 8,
-     alignItems: "center",
-     backgroundColor: '#D9D9D9',
-     color: "black",
-     justifyContent: "center",
-     elevation: 2,
-     marginTop: 10,
-   },
+  },
+  input: {
+    width: 200,
+    height: 40,
+    borderRadius: 5,
+    backgroundColor: '#F0F0F0',
+    elevation: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 10,
+    marginTop: 10,
+    fontSize: 20,
+  },
+  btn: {
+    width: 200,
+    height: 40,
+    borderRadius: 8,
+    alignItems: "center",
+    backgroundColor: '#D9D9D9',
+    color: "black",
+    justifyContent: "center",
+    elevation: 2,
+    marginTop: 10,
+  },
 });

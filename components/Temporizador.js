@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { AntDesign, Entypo } from '@expo/vector-icons';
 
 const Temporizador = () => {
   const [tempo, setTempo] = useState(0);
@@ -64,13 +65,13 @@ const Temporizador = () => {
         />
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={startTimer}>
-            <Text style={styles.buttonText}>▶</Text>
+          <AntDesign name="caretright" size={24} color="black" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={stopTimer}>
-            <Text style={styles.buttonText}>║</Text>
+          <AntDesign name="pause" size={24} color="black" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={resetTimer}>
-            <Text style={styles.buttonText}>⬤</Text>
+          <Entypo name="ccw" size={24} color="black" />
           </TouchableOpacity>
         </View>
       </View>
@@ -80,10 +81,8 @@ const Temporizador = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.4,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
   },
   viewTemp: {
     backgroundColor: '#D9D9D9',
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#F0F0F0',
     borderRadius: 2,
-    padding: 2,
+    marginTop: 4,
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 2,

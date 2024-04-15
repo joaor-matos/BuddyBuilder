@@ -1,6 +1,12 @@
+//Componentes
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native"
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function Configuracao() {
+//Páginas
+import CalculoIMC from './CalculoIMC';
+
+function Configuracao({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.conta}>
@@ -17,6 +23,8 @@ export default function Configuracao() {
         </View>
     )
 }
+
+export default Configuracao;
 
 const styles = StyleSheet.create({
     container: {
@@ -45,10 +53,11 @@ const styles = StyleSheet.create({
     },
     add: {
         padding: 12,
+        margin: 5,
         fontSize: 16,
         fontWeight: "600",
         backgroundColor: "#707070",
-        color: "#fff",
+        color: 'F0F0F0',
         borderRadius: 8,
     }
 })
