@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, TextInput, TouchableOpacity, StyleSheet, Image, Text } from "react-native";
 
 export default function CriarTrieno({ navigation }) {
     const [nomeTreino, setNomeTreino] = useState("");
@@ -30,7 +30,9 @@ export default function CriarTrieno({ navigation }) {
 
             <TouchableOpacity onPress={handleCreate}><Image source={"../svg/plus.svg"} alt="Adicionar exercício"/></TouchableOpacity>
 
-            <TouchableOpacity onPress={handleFinally}>Finalizar</TouchableOpacity>
+            <TouchableOpacity onPress={handleFinally}>
+                <Text style={styles.btn}>Finalizar</Text>
+            </TouchableOpacity>
 
         </View>
     )
@@ -56,5 +58,17 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 10,
         marginHorizontal: 2
+    },
+    btn: {
+        width: 200,
+        padding: 12,
+        borderRadius: 8,
+        alignItems: "center",
+        backgroundColor: '#D9D9D9',
+        color: "777777",
+        justifyContent: "center",
+        elevation: 2,
+        marginTop: 15,
+        textAlign: 'center'
     }
 })
