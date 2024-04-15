@@ -5,14 +5,14 @@ export default function Configuracao() {
         <View style={styles.container}>
             <View style={styles.conta}>
                 <Text style={styles.text}>Perfil</Text>
-                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 16, fontWeight: 700}}>Usuário</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 16, fontWeight: 700}}>Calculo IMC</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 16, fontWeight: "700"}}>Usuário</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 16, fontWeight: "700"}}>Calculo IMC</Text></TouchableOpacity>
             </View>
             <View style={styles.conta}>
                 <Text style={styles.text}>Treino</Text>
-                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 16, fontWeight: 700}}>Pernas</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 16, fontWeight: 700}}>Biceps / Triceps</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.add}><Text style={{fontSize: 16, fontWeight: 700}}>Adicionar novo Treino</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 16, fontWeight: "700"}}>Pernas</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 16, fontWeight: "700"}}>Biceps / Triceps</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.add}><Text style={{fontSize: 16, fontWeight: "700"}}>Adicionar novo Treino</Text></TouchableOpacity>
             </View>
         </View>
     )
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#F0F0F0",
         color: "#000",
         fontSize: 20,
-        fontWeight: 600,
+        fontWeight: "600",
         margin: 12,
         padding: 8,
         borderRadius: 8
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 16,
         padding: 12,
-        fontWeight: 700,
+        fontWeight: "700",
     },
     conta: {
         flex: 1,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     add: {
         padding: 12,
         fontSize: 16,
-        fontWeight: 600,
+        fontWeight: "600",
         backgroundColor: "#707070",
         color: "#fff",
         borderRadius: 8,

@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-native";
 
   const SignUpScreen = () => {
@@ -86,7 +86,7 @@ import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-nativ
      textNickname: {
          fontSize: 14,
          fontFamily: 'Inter',
-         fontWeight: 400,
+         fontWeight: "400",
          width: 50,
          height: 17,
          top: 123,
@@ -95,7 +95,7 @@ import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-nativ
      textEmail: {
          fontFamily: 'Inter',
          fontSize: 14,
-         fontWeight: 400,
+         fontWeight: "400",
          width: 42,
          height: 17,
          top: 193,
@@ -104,7 +104,7 @@ import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-nativ
      textPassword: {
        fontFamily: 'Inter',
        fontSize: 14,
-       fontWeight: 400,
+       fontWeight: "400",
        width: 42,
        height: 17,
        top: 263,
@@ -113,7 +113,7 @@ import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-nativ
    textConfirm: {
        fontFamily: 'Inter',
        fontSize: 14,
-       fontWeight: 400,
+       fontWeight: "400",
        width: 111,
        height: 17,
        top: 333,
@@ -126,7 +126,7 @@ import { View, TextInput, Text, TouchableOpacity, StyleSheet } from "react-nativ
        left: 65,
        fontFamily: 'Inter',
        fontSize: 14,
-       fontWeight: 700,
+       fontWeight: "700",
      }
  })
 
