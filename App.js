@@ -67,12 +67,13 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='Home'>
+          <Stack.Navigator initialRouteName='Login'>
             <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
             <Stack.Screen options={{ headerShown: true }} name='Configuracao' component={ConfigScreen} />
             <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
             <Stack.Screen options={{ headerShown: true }} name='Treino' component={CriarTreino} />
             <Stack.Screen options={{ headerShown: true }} name='ConfigUsuario' component={ConfigUsuario} />
+            <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
           </Stack.Navigator>
         </NavigationContainer>
   );
