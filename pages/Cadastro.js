@@ -15,119 +15,110 @@ const SignUpScreen = () => {
 function CadastroScreen() {
     return (
         <View style={styles.container}>
-            <Text style={styles.textNickname}>Apelido</Text>
-            {/* <TextInput style={styles.nicknameInput} placeholder="Apelido" onChangeText={text => setNickname(text)} value={nickname} /> */}
-            <TextInput style={styles.nicknameInput} placeholder="Apelido" />
+            <View style={{gap: 5}}>
+                <Text style={styles.textNickname}>Apelido</Text>
+                {/* <TextInput style={styles.nicknameInput} placeholder="Apelido" onChangeText={text => setNickname(text)} value={nickname} /> */}
+                <TextInput style={styles.nicknameInput} placeholder="Apelido" />
 
-            <Text style={styles.textEmail}>E-mail</Text>
-            {/* <TextInput style={styles.emailInput} placeholder="E-mail" onChangeText={text => setEmail(text)} value={email} /> */}
-            <TextInput style={styles.emailInput} placeholder="E-mail" />
+                <Text style={styles.textEmail}>E-mail</Text>
+                {/* <TextInput style={styles.emailInput} placeholder="E-mail" onChangeText={text => setEmail(text)} value={email} /> */}
+                <TextInput style={styles.emailInput} placeholder="E-mail" />
 
-            <Text style={styles.textPassword}>Senha</Text>
-            {/* <TextInput placeholder="Senha" onChangeText={text => setPassword(text)} value={password} /> */}
-            <TextInput style={styles.passwordInput} placeholder="Senha" />
+                <Text style={styles.textPassword}>Senha</Text>
+                {/* <TextInput placeholder="Senha" onChangeText={text => setPassword(text)} value={password} /> */}
+                <TextInput style={styles.passwordInput} placeholder="Senha" />
 
-            <Text style={styles.textConfirm}>Confirmar senha</Text>
-            {/* <TextInput style={styles.confirmPasswordInput} placeholder="Confirmar senha" onChangeText={text => setConfirmPassWord(text)} value={confirmPassword} /> */}
-            <TextInput style={styles.confirmPasswordInput} placeholder="Confirmar senha" />
+                <Text style={styles.textConfirm}>Confirmar senha</Text>
+                {/* <TextInput style={styles.confirmPasswordInput} placeholder="Confirmar senha" onChangeText={text => setConfirmPassWord(text)} value={confirmPassword} /> */}
+                <TextInput style={styles.confirmPasswordInput} placeholder="Confirmar senha" />
 
-            <TouchableOpacity style={styles.btnCadastro}><Text style={styles.textCadastro}>Concluir cadastro</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btnCadastro}><Text style={{ fontWeight: "bold", textAlign: 'center' }}>Concluir cadastro</Text></TouchableOpacity>
 
-            <TouchableOpacity
-                title="Login" onPress={() => navigation.navigate('Login')} >
-                <Text>Fazer Login</Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                    title="Login" style={styles.btnCadastro} onPress={() => navigation.navigate('Login')} >
+                    <Text style={{ fontWeight: "bold", textAlign: 'center' }}>
+                        Fazer Login
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
 
- const styles = StyleSheet.create({
-     container: {
-         flex: 1,
-         backgroundColor: "#F5F5F5",
-         alignItems: 'center',
-         justifyContent: 'center',
-     },
-     nicknameInput: {
-         width: 191,
-         height: 26,
-         top: 143,
-         left: 31,
-         borderRadius: 5,
-     },
-     emailInput: {
-         width: 191,
-         height: 26,
-         top: 213,
-         left: 31,
-         borderRadius: 5,
-     },
-     passwordInput: {
-         width: 191,
-         height: 26,
-         top: 283,
-         left: 31,
-         borderRadius: 5,
-     },
-     confirmPasswordInput: {
-         width: 191,
-         height: 36,
-         top: 353,
-         left: 31,
-         borderRadius: 5,
-     },
-     btnCadastro: {
-         width: 191,
-         height: 36,
-         top: 403,
-         left: 44,
-         borderRadius: 8
-     },
-     textNickname: {
-         fontSize: 14,
-         fontFamily: 'Inter',
-         fontWeight: "400",
-         width: 50,
-         height: 17,
-         top: 123,
-         left: 31,
-     },
-     textEmail: {
-         fontFamily: 'Inter',
-         fontSize: 14,
-         fontWeight: "400",
-         width: 42,
-         height: 17,
-         top: 193,
-         left: 31,
-     },
-     textPassword: {
-       fontFamily: 'Inter',
-       fontSize: 14,
-       fontWeight: "400",
-       width: 42,
-       height: 17,
-       top: 263,
-       left: 31,
-   },
-   textConfirm: {
-       fontFamily: 'Inter',
-       fontSize: 14,
-       fontWeight: "400",
-       width: 111,
-       height: 17,
-       top: 333,
-       left: 31,
-   },
-   textCadastro: {
-       width: 122,
-       height: 17,
-       top: 413,
-       left: 65,
-       fontFamily: 'Inter',
-       fontSize: 14,
-       fontWeight: "700",
-     }
- })
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#F5F5F5",
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    nicknameInput: {
+        width: 230,
+        height: 35,
+        padding: 3,
+        borderRadius: 5,
+        backgroundColor: "#D9D9D9"
+    },
+    emailInput: {
+        width: 230,
+        height: 35,
+        padding: 3,
+        borderRadius: 5,
+        backgroundColor: "#D9D9D9"
+    },
+    passwordInput: {
+        width: 230,
+        height: 35,
+        padding: 3,
+        borderRadius: 5,
+        backgroundColor: "#D9D9D9"
+    },
+    confirmPasswordInput: {
+        width: 230,
+        height: 35,
+        padding: 3,
+        borderRadius: 5,
+        backgroundColor: "#D9D9D9"
+    },
+    btnCadastro: {
+        width: 230,
+        height: 35,
+        padding: 5,
+        borderRadius: 8,
+        backgroundColor: "#D9D9D9",
+        marginTop: 15,
+    },
+    textNickname: {
+        fontSize: 14,
+        fontFamily: 'Inter',
+        fontWeight: "400",
+        textAlign: "left"
+    },
+    textEmail: {
+        fontFamily: 'Inter',
+        fontSize: 14,
+        fontWeight: "400",
+    },
+    textPassword: {
+        fontFamily: 'Inter',
+        fontSize: 14,
+        fontWeight: "400",
+    },
+    textConfirm: {
+        fontFamily: 'Inter',
+        fontSize: 14,
+        fontWeight: "400",
+    },
+    textCadastro: {
+        fontFamily: 'Inter',
+        fontSize: 14,
+        fontWeight: "700",
+    },
+    textPassword: {
+        fontFamily: 'Inter',
+        fontSize: 14,
+        fontWeight: "400",
+    },
+})
 
 export default CadastroScreen;
