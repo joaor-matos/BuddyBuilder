@@ -26,19 +26,18 @@ function HomeScreen({ navigation }) {
       <View style={styles.menu}>
         <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
           onPress={() => navigation.navigate('Configuracao')}>
-            <View style={{ backgroundColor: '#AB0000', height: '60%', width: '60%', borderRadius: 6, }}/>
+          <View style={{ backgroundColor: '#AB0000', height: '60%', width: '60%', borderRadius: 6, }} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.timerTreino} activeOpacity={0.9}
-          onPress={() => navigation.navigate('Configuracao')}>
-            <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>1:12:43</Text>
+        <TouchableOpacity style={styles.timerTreino} activeOpacity={0.9}>
+          <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>1:12:43</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
           onPress={() => navigation.navigate('Configuracao')}>
-            <Image
-          source={require('./images/menu.png')}
-          style={styles.iconMenu}
+          <Image
+            source={require('./images/menu.png')}
+            style={styles.iconMenu}
           />
         </TouchableOpacity>
 
@@ -55,21 +54,21 @@ function HomeScreen({ navigation }) {
           <Exercicio nomeExerc='PANTURRILHA BURRINHO' />
         </ScrollView>
       </View>
-      
-      <View style={{ flexDirection: 'column', justifyContent: 'space-between',  }}>
+
+      <View style={{ flexDirection: 'column', justifyContent: 'space-between', }}>
         <Temporizador />
         <Cronometro />
       </View>
-    
+
     </SafeAreaView>
   );
 }
 
 function IMCScreen({ navigation }) {
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', padding: 50 }}>
+    <View style={{ backgroundColor: '#182649', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <IMC />
-    </View>
+      </View>
   )
 }
 
@@ -77,17 +76,17 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName='Home'>
-            <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
-            <Stack.Screen options={{ headerShown: true }} name='Configuracao' component={ConfigScreen} />
-            <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
-            <Stack.Screen options={{ headerShown: true }} name='Treino' component={CriarTreino} />
-            <Stack.Screen options={{ headerShown: true }} name='ConfigUsuario' component={ConfigUsuario} />
-            <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
-            <Stack.Screen options={{ headerShown: false }} name='Cadastro' component={Cadastro} />
-          </Stack.Navigator>
-        </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Configuracao'>
+        <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
+        <Stack.Screen options={{ headerShown: false }} name='Configuracao' component={ConfigScreen} />
+        <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
+        <Stack.Screen options={{ headerShown: true }} name='Treino' component={CriarTreino} />
+        <Stack.Screen options={{ headerShown: true }} name='ConfigUsuario' component={ConfigUsuario} />
+        <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
+        <Stack.Screen options={{ headerShown: false }} name='Cadastro' component={Cadastro} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 10,
   },
-  
+
   iconMenu: {
     alignItems: 'center',
     justifyContent: 'center',

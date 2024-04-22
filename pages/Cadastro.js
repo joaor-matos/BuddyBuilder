@@ -15,31 +15,31 @@ const SignUpScreen = () => {
 function CadastroScreen() {
     return (
         <View style={styles.container}>
-            <View style={{gap: 5}}>
+            <View style={{}}>
                 <Text style={styles.textNickname}>Apelido</Text>
                 {/* <TextInput style={styles.nicknameInput} placeholder="Apelido" onChangeText={text => setNickname(text)} value={nickname} /> */}
-                <TextInput style={styles.nicknameInput} placeholder="Apelido" />
+                <TextInput style={styles.nicknameInput} />
 
                 <Text style={styles.textEmail}>E-mail</Text>
                 {/* <TextInput style={styles.emailInput} placeholder="E-mail" onChangeText={text => setEmail(text)} value={email} /> */}
-                <TextInput style={styles.emailInput} placeholder="E-mail" />
+                <TextInput style={styles.emailInput} />
 
                 <Text style={styles.textPassword}>Senha</Text>
                 {/* <TextInput placeholder="Senha" onChangeText={text => setPassword(text)} value={password} /> */}
-                <TextInput style={styles.passwordInput} placeholder="Senha" />
+                <TextInput style={styles.passwordInput} />
 
                 <Text style={styles.textConfirm}>Confirmar senha</Text>
                 {/* <TextInput style={styles.confirmPasswordInput} placeholder="Confirmar senha" onChangeText={text => setConfirmPassWord(text)} value={confirmPassword} /> */}
-                <TextInput style={styles.confirmPasswordInput} placeholder="Confirmar senha" />
+                <TextInput style={styles.confirmPasswordInput} />
 
-                <TouchableOpacity style={styles.btnCadastro}><Text style={{ fontWeight: "bold", textAlign: 'center' }}>Concluir cadastro</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btnCadastro}><Text style={{ fontWeight: "bold", textAlign: 'center', fontSize: 20, }}>Concluir cadastro</Text></TouchableOpacity>
 
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     title="Login" style={styles.btnCadastro} onPress={() => navigation.navigate('Login')} >
                     <Text style={{ fontWeight: "bold", textAlign: 'center' }}>
                         Fazer Login
                     </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </View>
     )
@@ -53,70 +53,86 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     nicknameInput: {
-        width: 230,
+        width: 300,
         height: 35,
         padding: 3,
         borderRadius: 5,
-        backgroundColor: "#D9D9D9"
+        backgroundColor: "#D9D9D9",
+        borderWidth: 1,
+        borderColor: '#BFBFBF',
+        marginBottom: 30,
     },
     emailInput: {
-        width: 230,
+        width: 300,
         height: 35,
         padding: 3,
         borderRadius: 5,
-        backgroundColor: "#D9D9D9"
+        backgroundColor: "#D9D9D9",
+        borderWidth: 1,
+        borderColor: '#BFBFBF',
+        marginBottom: 30,
     },
     passwordInput: {
-        width: 230,
+        width: 300,
         height: 35,
         padding: 3,
         borderRadius: 5,
-        backgroundColor: "#D9D9D9"
+        backgroundColor: "#D9D9D9",
+        borderWidth: 1,
+        borderColor: '#BFBFBF',
+        marginBottom: 30,
     },
     confirmPasswordInput: {
-        width: 230,
+        width: 300,
         height: 35,
         padding: 3,
         borderRadius: 5,
-        backgroundColor: "#D9D9D9"
+        backgroundColor: "#D9D9D9",
+        borderWidth: 1,
+        borderColor: '#BFBFBF',
+        marginBottom: 30,
     },
     btnCadastro: {
-        width: 230,
-        height: 35,
-        padding: 5,
+        width: 270,
+        padding: 8,
         borderRadius: 8,
         backgroundColor: "#D9D9D9",
         marginTop: 15,
+        alignSelf: 'center',
     },
     textNickname: {
-        fontSize: 14,
+        fontSize: 20,
         fontFamily: 'Inter',
         fontWeight: "400",
-        textAlign: "left"
+        textAlign: "left",
+        marginBottom: 3,
     },
     textEmail: {
         fontFamily: 'Inter',
-        fontSize: 14,
+        fontSize: 20,
         fontWeight: "400",
+        marginBottom: 3,
     },
     textPassword: {
         fontFamily: 'Inter',
-        fontSize: 14,
+        fontSize: 20,
         fontWeight: "400",
+        marginBottom: 3,
     },
     textConfirm: {
         fontFamily: 'Inter',
-        fontSize: 14,
+        fontSize: 20,
         fontWeight: "400",
+        marginBottom: 3,
     },
     textCadastro: {
         fontFamily: 'Inter',
-        fontSize: 14,
+        fontSize: 20,
         fontWeight: "700",
     },
     textPassword: {
         fontFamily: 'Inter',
-        fontSize: 14,
+        fontSize: 20,
         fontWeight: "400",
     },
 })
