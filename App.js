@@ -82,6 +82,7 @@ function App() {
         <Stack.Screen options={{ headerShown: false }} name='Configuracao' component={ConfigScreen} />
         <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
         <Stack.Screen options={{ headerShown: true }} name='Treino' component={CriarTreino} />
+        <Stack.Screen options={{ headerShown: true }} name='ConfigUsuario' component={ConfigUsuario} />
         <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
         <Stack.Screen options={{ headerShown: false }} name='Cadastro' component={Cadastro} />
       </Stack.Navigator>
