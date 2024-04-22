@@ -18,7 +18,6 @@ import Login from './pages/Login';
 import CriarTreino from './pages/CriarTreino';
 import ConfigScreen from './pages/Configuracao';
 import CalculoIMC from './pages/CalculoIMC';
-import ConfigUsuario from './pages/ConfigUsuario';
 
 function HomeScreen({ navigation }) {
   return (
