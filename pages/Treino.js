@@ -1,125 +1,75 @@
-import { cloneElement, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from "react";
+import { View, TextInput, TouchableOpacity, StyleSheet, Image, Text } from "react-native";
 
-const AdicionarExerc = () => {
-    
-    const [quantPeso, setPeso] = useState();
-    const [quantSet, setSet] = useState();
-    const [quantRep, setRep] = useState();
-    const [nomeExerc, setNomeExerc] = useState();
-    const [treino, setTreino] = useState([]);
-    const [nomeTreino, setNomeTreino] = useState();
+export default function CriarTrieno({ navigation }) {
+    const [nomeTreino, setNomeTreino] = useState("");
+    const [exercicio, setExercicio] = useState("");
+    const [quantRepeticao, setQuantRepeticao] = useState(0);
+    const [quantSets, setQuantSets] = useState(0);
+    const [descricao, setDescricao] = useState("");
 
-    const handleTreino = () => {
-        const arrExerc = {
-            nome: nomeExerc,
-            peso: quantPeso,
-            set: quantSet,
-            rep: quantRep,
-        }
-
-        setTreino([...treino, arrExerc]);
-        setPeso('');
-        setSet('');
-        setRep('');
-        setNomeExerc('');
-    };
-    return (
-        <View style={{ borderColor: 'black', borderWidth: 2, paddingTop: 7, paddingHorizontal: 5, borderRadius: 10, }}>
-                        <TextInput style={styles.exercInput} placeholder='Nome do Exercício' 
-                        value={nomeExerc}
-                        onChangeText={text => setNomeExerc(text)}>
-                        </TextInput>
-                        <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
-                            <TextInput style={styles.exercInput} placeholder='Peso'
-                            value={quantPeso}
-                            onChangeText={text => setPeso(text)}></TextInput>
-                            <TextInput style={styles.exercInput} placeholder='Sets'
-                            value={quantSet}
-                            onChangeText={text => setSet(text)}></TextInput>
-                            <TextInput style={styles.exercInput} placeholder='Repetições'
-                            value={quantRep}
-                            onChangeText={text => setRep(text)}></TextInput>
-                        </View>
-                    </View>
-    );
-};
-
-const CriarTreino = () => {
-
-    const [listForm, setListForm] = useState([]);
-
-    const addExercForm = () => {
-        setListForm([...listForm, ])
+    const handleCreate = () => {
+        // Criar a lógica do botão de criar novas listas
     }
 
-    return(
-        <SafeAreaView>
-            <View style={styles.header}>
-                <Text style={{ color: 'white', fontSize: 30 }}>Criar treino</Text>
+    const handleFinally = () => {
+        // Criar a lógica do botão para finalizar a criação dos treinos
+    }
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.treino}>
+                <TextInput style={styles.inputTreino} value={nomeTreino} keyboardType="text" onChange={(text) => setNomeTreino(text)} placeholder="Nome do Treino" />
             </View>
-            <View style={styles.container}>
-                <TextInput style={styles.input} placeholder='Nome do Treino'></TextInput>
-                <ScrollView style={{ marginBottom: 10 }}>
-                    
-                    
-                </ScrollView>
-                <View>
-                    <TouchableOpacity style={ styles.addExerc }>
-                        <Text style={{ fontSize: 40, }}>+</Text>
-                    </TouchableOpacity>
-                </View>
+            <View>
+                <TextInput value={exercicio} onChange={(text) => setExercicio(text)} keyboardType="text" placeholder="Exercício" />
+                <TextInput value={quantRepeticao} onChange={(text) => setQuantRepeticao(text)} keyboardType="number" placeholder="Repetições" />
+                <TextInput value={quantSets} onChange={(text) => setQuantSets(text)} keyboardType="number" placeholder="Sets" />
+                <TextInput value={descricao} onChange={(text) => setDescricao(text)} keyboardType="text" placeholder="Descrição" />
             </View>
-        </SafeAreaView>
+
+            <TouchableOpacity onPress={handleCreate}><Image source={"../svg/plus.svg"} alt="Adicionar exercício"/></TouchableOpacity>
+
+            <TouchableOpacity onPress={handleFinally}>
+                <Text style={styles.btn}>Finalizar</Text>
+            </TouchableOpacity>
+
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
-
-    },
-    header: {
-        backgroundColor: 'black',
-        alignItems: 'center',
+        flex: 0.5,
         justifyContent: 'center',
-        height: 50,
-        
+        alignItems: 'center',
+        marginTop: 20,
+        backgroundColor: '#182649'
     },
-    itemText: {
-        fontSize: 20,
-        fontWeight: 'bold',
+    treino: {
+        flex: 0.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10
     },
-    input: {
-        alignSelf: 'center',
+    inputTreino: {
+        color: "#000000",
         fontSize: 20,
-        backgroundColor: 'gray',
-        borderRadius: 5,
-        padding: 10,
-        width: 300,
-        marginBottom: 20,
-    },
-    exercInput: {
-        fontSize: 20,
-        backgroundColor: 'gray',
-        borderRadius: 5,
+        borderRadius: 10,
         padding: 10,
         marginBottom: 10,
-        marginHorizontal: 2,
+        marginHorizontal: 2
     },
-    addExerc: {
-        height: 60,
-        width: 100,
-        paddingTop: -3,
-        borderColor: 'black',
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10,
-        alignSelf: 'center',
-
-    },
-});
-
-export default CriarTreino;
+    btn: {
+        width: 200,
+        padding: 12,
+        borderRadius: 8,
+        alignItems: "center",
+        backgroundColor: '#D9D9D9',
+        color: "777777",
+        justifyContent: "center",
+        elevation: 2,
+        marginTop: 15,
+        textAlign: 'center'
+    }
+})
