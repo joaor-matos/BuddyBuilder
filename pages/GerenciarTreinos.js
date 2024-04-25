@@ -152,4 +152,4 @@ const styles = StyleSheet.create({
       },
 });
 
-export default CriarTreino;
+export default GerenciarTreinos;

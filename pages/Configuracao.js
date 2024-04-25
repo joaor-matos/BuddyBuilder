@@ -2,11 +2,13 @@
 import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native"
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useFonts } from 'expo-font';
 
 //Páginas
 import CalculoIMC from './CalculoIMC';
 
 function Configuracao({ navigation }) {
+    
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Perfil</Text>

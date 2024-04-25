@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { cloneElement, startTransition } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFonts } from 'expo-font';
 
 // Componentes
 import Cronometro from './components/Cronometro';
@@ -75,6 +76,10 @@ function IMCScreen({ navigation }) {
 const Stack = createNativeStackNavigator();
 
 function App() {
+  const [fontsLoaded] = useFonts({
+    'Inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
+  });
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='CriarTreino'>
