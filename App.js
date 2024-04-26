@@ -20,6 +20,7 @@ import CriarTreino from './pages/CriarTreino';
 import ConfigScreen from './pages/Configuracao';
 import CalculoIMC from './pages/CalculoIMC';
 import Treino from './pages/Treino';
+import GerenciarTreinos from './pages/GerenciarTreinos';
 
 function HomeScreen({ navigation }) {
   return (
@@ -82,7 +83,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='CriarTreino'>
+      <Stack.Navigator initialRouteName='GerenciarTreinos'>
         <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
         <Stack.Screen options={{ headerShown: false }} name='Configuracao' component={ConfigScreen} />
         <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
@@ -90,6 +91,7 @@ function App() {
         <Stack.Screen options={{ headerShown: true }} name='Treino' component={Treino} />
         <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
         <Stack.Screen options={{ headerShown: false }} name='Cadastro' component={Cadastro} />
+        <Stack.Screen options={{ headerShown: false }} name='GerenciarTreinos' component={GerenciarTreinos} />
       </Stack.Navigator>
     </NavigationContainer>
   );

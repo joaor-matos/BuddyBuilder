@@ -50,7 +50,7 @@ const AdicionarExerc = () => {
     );
 };
 
-const CriarTreino = () => {
+const GerenciarTreinos = () => {
 
     const [listForm, setListForm] = useState([]);
 
@@ -61,31 +61,26 @@ const CriarTreino = () => {
     return (
         <View style={{ backgroundColor: '#182649', flex: 1, paddingVertical: 30, }}>
             <View style={styles.header}>
-                <Text style={{ color: '#F0F0F0', fontSize: 45, fontWeight: '600', fontFamily: 'Inter-Bold', }}>Criar treino</Text>
+                <Text style={{ color: '#F0F0F0', fontSize: 45, fontWeight: '600', fontFamily: 'Inter-Bold', }}>Gerenciar</Text>
             </View>
-            <View style={{ flex:1 , justifyContent: 'flex-start' }}>
-                <View style={styles.container}>
-                    <View style={styles.containerInput}>
-                        <TextInput style={{ fontSize: 24, fontFamily: 'Inter-Bold' }} placeholder='Nome do Treino'></TextInput>
-                    </View>
-                    <TouchableOpacity style={styles.addExerc}>
-                        <Image 
-                        source='./images/plus.png'
-                        />
-                    </TouchableOpacity>
-                </View>
+            <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+                <View style={styles.containerNome}>
+                    <Text>TREINO A</Text>
+                <View/>
 
-                {/* <ScrollView style={{ marginBottom: 10 }}> */}
+            </View>
 
-                {/* </ScrollView> */}
-                <View style={{ flexDirection: 'column' }}>
+            {/* <ScrollView style={{ marginBottom: 10 }}> */}
 
-                    <TouchableOpacity style={styles.finalizarTreino}>
-                        <Text style={{ fontSize: 30, color: '#F0F0F0', fontFamily: 'Inter-Bold', }}>Finalizar</Text>
-                    </TouchableOpacity>
-                </View>
+            {/* </ScrollView> */}
+            <View style={{ flexDirection: 'column' }}>
+
+                <TouchableOpacity style={styles.finalizarTreino}>
+                    <Text style={{ fontSize: 30, color: '#F0F0F0', fontFamily: 'Inter-Bold', }}>Finalizar</Text>
+                </TouchableOpacity>
             </View>
         </View>
+        </View >
     )
 }
 
@@ -101,11 +96,11 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
 
     },
-    itemText: {
+    containerTreino: {
         fontSize: 20,
         fontWeight: 'bold',
     },
-    containerInput: {
+    containerNome: {
         fontSize: 20,
         backgroundColor: '#F0F0F0',
         borderRadius: 6,
@@ -149,7 +144,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 5,
-      },
+    },
 });
 
 export default GerenciarTreinos;
