@@ -8,26 +8,35 @@ import { useFonts } from 'expo-font';
 import CalculoIMC from './CalculoIMC';
 
 function Configuracao({ navigation }) {
-    
+
     return (
         <View style={styles.container}>
+            <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+                onPress={() => navigation.navigate('Configuracao')}>
+                <Image
+                    source={require('../images/menu.png')}
+                    style={styles.iconMenu}
+                />
+            </TouchableOpacity>
             <Text style={styles.text}>Perfil</Text>
-            <View style={{ alignSelf: 'center', justifyContent: 'space-around', backgroundColor: '#F0F0F0', borderRadius: 4, height: 160, width: 380,}}>
-                
-                <Image />
+            <View style={{ alignSelf: 'center', justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center', backgroundColor: '#F0F0F0', borderRadius: 4, height: 160, width: 380, }}>
+
+                <Image source={require('../images/user_icon.png')}
+                    style={styles.userIcon}
+                />
 
                 <View>
                     <Text style={{ fontSize: 18, marginBottom: 8, fontWeight: '700' }}>nome_usuario</Text>
                     <Text style={{ fontSize: 18 }}>Dias ativo: </Text>
                     <Text style={{ fontSize: 18 }}>IMC: </Text>
                 </View>
-                
+
             </View>
             <View style={styles.conta}>
                 <Text style={styles.text}>Configurações</Text>
-                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 20, fontWeight: "500"}}>Apelido</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 20, fontWeight: "500"}}>Calculo IMC</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.btn}><Text style={{fontSize: 20, fontWeight: "500"}}>Gerenciar treinos</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btn}><Text style={{ fontSize: 20, fontWeight: "500" }}>Apelido</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btn}><Text style={{ fontSize: 20, fontWeight: "500" }}>Calculo IMC</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btn}><Text style={{ fontSize: 20, fontWeight: "500" }}>Gerenciar treinos</Text></TouchableOpacity>
             </View>
         </View>
     )
@@ -41,6 +50,10 @@ const styles = StyleSheet.create({
         paddingTop: 70,
         padding: 5,
         backgroundColor: "#182649",
+    },
+    userIcon: {
+        width: 100,
+        height: 100,
     },
     btn: {
         backgroundColor: "#F0F0F0",
@@ -70,5 +83,17 @@ const styles = StyleSheet.create({
         backgroundColor: "#707070",
         color: 'F0F0F0',
         borderRadius: 8,
-    }
+    },
+    btnHome: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#D9D9D9',
+        borderColor: '#fff',
+        height: 70,
+        width: 70,
+        borderRadius: 10,
+    },
+    iconHome: {
+        
+    },
 })

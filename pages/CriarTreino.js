@@ -66,11 +66,12 @@ const CriarTreino = () => {
             <View style={{ flex:1 , justifyContent: 'flex-start' }}>
                 <View style={styles.container}>
                     <View style={styles.containerInput}>
-                        <TextInput style={{ fontSize: 24, fontFamily: 'Inter-Bold' }} placeholder='Nome do Treino'></TextInput>
+                        <TextInput style={{ fontSize: 24, fontFamily: 'Inter-Bold', alignSelf: 'center' }} placeholder='Nome do Treino'></TextInput>
                     </View>
                     <TouchableOpacity style={styles.addExerc}>
                         <Image 
-                        source='./images/plus.png'
+                        source={require('../images/plus.png')}
+                        style={styles.icon}
                         />
                     </TouchableOpacity>
                 </View>
@@ -110,6 +111,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#F0F0F0',
         borderRadius: 6,
         padding: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center'
 
     },
     exercInput: {
@@ -121,8 +125,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 2,
     },
     addExerc: {
-        height: 80,
-        width: 80,
+        height: 60,
+        width: 60,
         marginTop: 14,
         backgroundColor: '#F0F0F0',
         justifyContent: 'center',
@@ -146,8 +150,8 @@ const styles = StyleSheet.create({
     icon: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: 60,
-        width: 60,
+        height: 40,
+        width: 40,
         borderRadius: 5,
       },
 });

@@ -47,14 +47,15 @@ const Cronometro = () => {
   return (
     <View style={styles.container}>
       <View style={styles.viewCronometro}>
-        <View style={{ backgroundColor: '#F0F0F0', height: 48, width: 140, borderRadius: 5, marginBottom: 5, }}>
+        <Text style={{ fontSize: 28, fontWeight: '600', marginBottom: 5, justifyContent: 'space-around' }}>Cronometro</Text>
+        <View style={{ backgroundColor: '#F0F0F0', height: 48, width: 280, borderRadius: 5, marginBottom: 5, }}>
           <Text style={styles.timerText}>
           {formatTime(minutos)}:{formatTime(segundos)}
           </Text>
         </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={startTimer}>
-        <AntDesign name="caretright" size={24} color="black" />
+        <AntDesign name="caretright" size={24} color="#5A76C0" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={stopTimer}>
         <AntDesign name="pause" size={24} color="black" />

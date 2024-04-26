@@ -59,27 +59,31 @@ const GerenciarTreinos = () => {
     }
 
     return (
-        <View style={{ backgroundColor: '#182649', flex: 1, paddingVertical: 30, }}>
+        <View style={{ backgroundColor: '#182649', flex: 1, paddingVertical: 30, /* justifyContent: 'space-between' */ }}>
             <View style={styles.header}>
-                <Text style={{ color: '#F0F0F0', fontSize: 45, fontWeight: '600', fontFamily: 'Inter-Bold', }}>Gerenciar</Text>
-            </View>
-            <View style={{ flex: 1, justifyContent: 'flex-start' }}>
-                <View style={styles.containerNome}>
-                    <Text>TREINO A</Text>
-                <View/>
-
-            </View>
-
-            {/* <ScrollView style={{ marginBottom: 10 }}> */}
-
-            {/* </ScrollView> */}
-            <View style={{ flexDirection: 'column' }}>
-
-                <TouchableOpacity style={styles.finalizarTreino}>
-                    <Text style={{ fontSize: 30, color: '#F0F0F0', fontFamily: 'Inter-Bold', }}>Finalizar</Text>
+                <Text style={{ color: '#F0F0F0', fontSize: 45, fontWeight: '600', fontFamily: 'Inter-Bold', paddingBottom: 20, alignSelf: 'flex-start' }}>Gerenciar</Text>
+                <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}>
+                    <Image
+                        source={require('../images/menu.png')}
+                        style={styles.iconMenu}
+                    />
                 </TouchableOpacity>
             </View>
-        </View>
+            <View style={styles.containerTreino}>
+                <View style={styles.containerNome}>
+                    <Text style={{ fontFamily: 'Inter-Bold', fontSize: 30 }}>TREINO A</Text>
+                    <View />
+
+                </View>
+                <Image
+                    source={require('../images/lixo.png')}
+                    style={styles.icon}
+                />
+                {/* <ScrollView style={{ marginBottom: 10 }}> */}
+
+                {/* </ScrollView> */}
+
+            </View>
         </View >
     )
 }
@@ -94,56 +98,53 @@ const styles = StyleSheet.create({
         backgroundColor: '#182649',
         justifyContent: 'center',
         paddingLeft: 20,
-
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    iconMenu: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 60,
+        width: 60,
+        borderRadius: 5,
+        color: '#707070'
+    },
+    bttnMenu: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#D9D9D9',
+        borderColor: '#fff',
+        height: 70,
+        width: 70,
+        borderRadius: 10,
     },
     containerTreino: {
-        fontSize: 20,
-        fontWeight: 'bold',
+        backgroundColor: '#D9D9D9',
+        padding: 5,
+        margin: 10,
+        borderRadius: 6,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+
     },
     containerNome: {
         fontSize: 20,
         backgroundColor: '#F0F0F0',
         borderRadius: 6,
         padding: 16,
-
-    },
-    exercInput: {
-        fontSize: 20,
-        backgroundColor: 'gray',
-        borderRadius: 5,
-        padding: 10,
-        marginBottom: 10,
-        marginHorizontal: 2,
-    },
-    addExerc: {
-        height: 80,
-        width: 80,
-        marginTop: 14,
-        backgroundColor: '#F0F0F0',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
-        alignSelf: 'center',
-
-    },
-    finalizarTreino: {
-        backgroundColor: 'gray',
-        paddingHorizontal: 20,
-        borderWidth: 2,
-        borderColor: '#F0F0F0',
-        borderRadius: 6,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 7,
-        marginHorizontal: 10,
+        width: 350,
 
     },
     icon: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: 60,
-        width: 60,
-        borderRadius: 5,
+        height: 50,
+        width: 50,
+        marginHorizontal: 10,
+
     },
 });
 

@@ -57,7 +57,7 @@ function HomeScreen({ navigation }) {
         </ScrollView>
       </View>
 
-      <View style={{ flexDirection: 'column', justifyContent: 'space-between', }}>
+      <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, }}>
         <Temporizador />
         <Cronometro />
       </View>
@@ -83,7 +83,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='GerenciarTreinos'>
+      <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
         <Stack.Screen options={{ headerShown: false }} name='Configuracao' component={ConfigScreen} />
         <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
@@ -187,6 +187,9 @@ const styles = StyleSheet.create({
     width: 390,
     alignItems: 'center',
     flexDirection: 'column',
+  },
+  scrollTreino: {
+    height: 260,
   },
   viewExerc: {
     marginTop: 5,
