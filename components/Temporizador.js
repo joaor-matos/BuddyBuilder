@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from "react-native";
-import { AntDesign, Entypo } from '@expo/vector-icons';
+import { AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 
 const Temporizador = () => {
   const [tempo, setTempo] = useState(0);
@@ -53,7 +53,8 @@ const Temporizador = () => {
   return (
     <View style={styles.container}>
       <View style={styles.viewTemp}>
-        <View style={{ backgroundColor: '#F0F0F0', height: 48, width: 140, borderRadius: 5, marginTop: 5, }}>
+      <Text style={{ fontSize: 28, fontWeight: '600', marginBottom: 8, justifyContent: 'space-around' }}>Temporizador</Text>
+        <View style={{ backgroundColor: '#F0F0F0', width: 280, borderRadius: 5, }}>
           <Text style={styles.timerText}>{formatTime(tempo)}</Text>
         </View>
         <TextInput
@@ -65,13 +66,13 @@ const Temporizador = () => {
         />
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={startTimer}>
-          <AntDesign name="caretright" size={24} color="black" />
+          <AntDesign name="caretright" size={34} color="#5A76C0" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={stopTimer}>
-          <AntDesign name="pause" size={24} color="black" />
+          <FontAwesome5 name="pause" size={34} color="#549E48" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={resetTimer}>
-          <Entypo name="ccw" size={24} color="black" />
+          <Entypo name="ccw" size={34} color="#A63434" />
           </TouchableOpacity>
         </View>
       </View>
@@ -83,19 +84,20 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 20,
   },
   viewTemp: {
     backgroundColor: '#D9D9D9',
-    height: 140,
-    width: 150,
+    height: 200,
+    width: 300,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   timerText: {
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: 'bold',
-    marginBottom: 6,
+    marginVertical: 2,
     alignSelf: 'center',
   },
   buttonContainer: {
@@ -104,11 +106,12 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#F0F0F0',
-    width: 40,
+    width: 60,
     height: 40,
     alignItems: 'center',
     justifyContent: "center",
-    marginHorizontal: 2,
+    marginHorizontal: 6,
+    borderRadius: 2,
     marginVertical: 5,
   },
   buttonText: {
@@ -121,6 +124,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     justifyContent: "center",
     alignItems: "center",
+    alignSelf: 'center',
     paddingLeft: 2,
     fontSize: 20,
     width: 80,

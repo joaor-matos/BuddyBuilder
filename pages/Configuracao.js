@@ -11,13 +11,15 @@ function Configuracao({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+            <View style={{ justifyContent: 'flex-end', alignItems: 'flex-end', paddingHorizontal: 20, }}>
+            <TouchableOpacity style={styles.btnHome} activeOpacity={0.9}
                 onPress={() => navigation.navigate('Configuracao')}>
                 <Image
                     source={require('../images/menu.png')}
-                    style={styles.iconMenu}
+                    style={styles.iconHome}
                 />
             </TouchableOpacity>
+            </View>
             <Text style={styles.text}>Perfil</Text>
             <View style={{ alignSelf: 'center', justifyContent: 'space-around', flexDirection: 'row', alignItems: 'center', backgroundColor: '#F0F0F0', borderRadius: 4, height: 160, width: 380, }}>
 
@@ -94,6 +96,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     iconHome: {
-        
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 60,
+        width: 60,
+        borderRadius: 5,
     },
 })

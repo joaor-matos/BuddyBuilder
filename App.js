@@ -28,11 +28,11 @@ function HomeScreen({ navigation }) {
       <View style={styles.menu}>
         <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
           onPress={() => navigation.navigate('Configuracao')}>
-          <View style={{ backgroundColor: '#AB0000', height: '60%', width: '60%', borderRadius: 6, }} />
+          <View style={{ backgroundColor: '#549E48', height: '60%', width: '60%', borderRadius: 6, }} />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.timerTreino} activeOpacity={0.9}>
-          <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>1:12:43</Text>
+          <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>0:00:00</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
@@ -57,7 +57,7 @@ function HomeScreen({ navigation }) {
         </ScrollView>
       </View>
 
-      <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, }}>
+      <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, margin: 5, }}>
         <Temporizador />
         <Cronometro />
       </View>
@@ -83,7 +83,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
+      <Stack.Navigator initialRouteName='CriarTreino'>
         <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
         <Stack.Screen options={{ headerShown: false }} name='Configuracao' component={ConfigScreen} />
         <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />

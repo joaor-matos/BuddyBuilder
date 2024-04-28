@@ -65,8 +65,11 @@ const CriarTreino = () => {
             </View>
             <View style={{ flex:1 , justifyContent: 'flex-start' }}>
                 <View style={styles.container}>
-                    <View style={styles.containerInput}>
-                        <TextInput style={{ fontSize: 24, fontFamily: 'Inter-Bold', alignSelf: 'center' }} placeholder='Nome do Treino'></TextInput>
+                    <View style={styles.containerTreino}>
+                        <TextInput style={{ fontSize: 24, fontFamily: 'Inter-Bold', alignSelf: 'center', margin: 5, }} placeholder='Nome do Treino'></TextInput>
+                    </View>
+                    <View style={styles.containerExerc}>
+                        <Text style={{ fontSize: 24, fontWeight: '500',  }}>Nome do exercício</Text>
                     </View>
                     <TouchableOpacity style={styles.addExerc}>
                         <Image 
@@ -106,14 +109,15 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
     },
-    containerInput: {
+    containerTreino: {
         fontSize: 20,
         backgroundColor: '#F0F0F0',
         borderRadius: 6,
         padding: 16,
         justifyContent: 'center',
         alignItems: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginBottom: 10,
 
     },
     exercInput: {
@@ -153,7 +157,14 @@ const styles = StyleSheet.create({
         height: 40,
         width: 40,
         borderRadius: 5,
-      },
+    },
+    containerExerc: {
+        backgroundColor: '#FFFFFF',
+        borderColor: '#F0F0F0',
+        borderWidth: 10,
+        borderRadius: 8,
+        padding: 6,
+    },
 });
 
 export default CriarTreino;

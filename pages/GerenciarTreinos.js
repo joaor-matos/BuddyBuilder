@@ -59,9 +59,9 @@ const GerenciarTreinos = () => {
     }
 
     return (
-        <View style={{ backgroundColor: '#182649', flex: 1, paddingVertical: 30, /* justifyContent: 'space-between' */ }}>
+        <View style={{ backgroundColor: '#182649', flex: 1, paddingVertical: 50, /* justifyContent: 'space-between' */ }}>
             <View style={styles.header}>
-                <Text style={{ color: '#F0F0F0', fontSize: 45, fontWeight: '600', fontFamily: 'Inter-Bold', paddingBottom: 20, alignSelf: 'flex-start' }}>Gerenciar</Text>
+                <Text style={{ color: '#F0F0F0', fontSize: 40, fontWeight: '600', fontFamily: 'Inter-Bold', paddingBottom: 20, alignSelf: 'flex-start' }}>Gerenciar</Text>
                 <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}>
                     <Image
                         source={require('../images/menu.png')}
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 20,
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        justifyContent: 'space-between'
     },
     iconMenu: {
         alignItems: 'center',
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         borderRadius: 10,
+        marginRight: 20,
     },
     containerTreino: {
         backgroundColor: '#D9D9D9',
@@ -135,7 +136,8 @@ const styles = StyleSheet.create({
         padding: 16,
         justifyContent: 'center',
         alignItems: 'center',
-        width: 350,
+        alignSelf: 'stretch',
+        width: 'auto',
 
     },
     icon: {
