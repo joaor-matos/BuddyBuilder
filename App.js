@@ -44,7 +44,7 @@ function HomeScreen({ navigation }) {
       <View>
         <TouchableOpacity style={styles.btnTreino} activeOpacity={0.9}
         onPress={() => navigation.navigate('TreinoScreen')}>
-          <Text style={{ fontFamily: 'Inter-Bold', fontSize: 30 }}>TREINO A</Text>
+          <Text style={{ fontSize: 30 }}>TREINO A</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.btnAddExerc} activeOpacity={0.9}
@@ -107,7 +107,7 @@ function IMCScreen({ navigation }) {
     <View style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column', padding: 20, marginTop: 40,  }}>
       <StatusBar style="auto" />
       <View style={styles.headerIMC}>
-        <Text style={{ color: '#F0F0F0', fontSize: 40, fontWeight: '600', fontFamily: 'Inter-Bold', paddingBottom: 20, alignSelf: 'flex-start' }}>IMC</Text>
+        <Text style={{ color: '#F0F0F0', fontSize: 40, fontWeight: '600', paddingBottom: 20, alignSelf: 'flex-start' }}>IMC</Text>
         <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
           onPress={() => navigation.navigate('Configuracao')}>
           <Image
@@ -124,9 +124,9 @@ function IMCScreen({ navigation }) {
 const Stack = createNativeStackNavigator();
 
 function App() {
-  const [fontsLoaded] = useFonts({
-    'Inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
-  });
+  // const [fontsLoaded] = useFonts({
+  //   'Inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
+  // });
 
   return (
     <NavigationContainer>
