@@ -12,7 +12,7 @@ const SignUpScreen = () => {
     };
 }
 
-function CadastroScreen() {
+function CadastroScreen({navigation}) {
     return (
         <View style={styles.container}>
             <View style={{}}>
@@ -32,7 +32,8 @@ function CadastroScreen() {
                 {/* <TextInput style={styles.confirmPasswordInput} placeholder="Confirmar senha" onChangeText={text => setConfirmPassWord(text)} value={confirmPassword} /> */}
                 <TextInput style={styles.confirmPasswordInput} />
 
-                <TouchableOpacity style={styles.btnCadastro}><Text style={{ fontWeight: "bold", textAlign: 'center', fontSize: 20, }}>Concluir cadastro</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btnCadastro}
+                onPress={() => navigation.navigate('HomeScreen')}><Text style={{ fontWeight: "bold", textAlign: 'center', fontSize: 20, }}>Concluir cadastro</Text></TouchableOpacity>
 
                 {/* <TouchableOpacity
                     title="Login" style={styles.btnCadastro} onPress={() => navigation.navigate('Login')} >

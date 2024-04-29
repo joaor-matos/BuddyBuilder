@@ -130,7 +130,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='HomeScreen'>
+      <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen options={{ headerShown: false }} name='HomeScreen' component={HomeScreen} />
         <Stack.Screen options={{ headerShown: false }} name='TreinoScreen' component={TreinoScreen} />
         <Stack.Screen options={{ headerShown: false }} name='Configuracao' component={ConfigScreen} />

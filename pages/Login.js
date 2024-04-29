@@ -24,12 +24,14 @@ function Login({ navigation }) {
         {/* <TextInput style={styles.inputPassword} placeholder="Senha" onChangeText={(text) => setPassword(text)} value={password} /> */}
         <TextInput style={styles.input} placeholder="Senha" />
         <View style={{ margin: 50 }}>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn}
+          onPress={() => navigation.navigate('HomeScreen')}>
             <Text style={{ fontSize: 20, fontWeight: "bold", }}>Login</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn}>
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Cadrastar-se</Text>
+          <TouchableOpacity style={styles.btn}
+          onPress={() => navigation.navigate('Cadastro')}>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Cadastrar-se</Text>
           </TouchableOpacity>
         </View>
       </View>
