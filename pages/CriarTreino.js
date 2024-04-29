@@ -69,7 +69,9 @@ const CriarTreino = () => {
                         <TextInput style={{ fontSize: 24, fontFamily: 'Inter-Bold', alignSelf: 'center', margin: 5, }} placeholder='Nome do Treino'></TextInput>
                     </View>
                     <View style={styles.containerExerc}>
-                        <Text style={{ fontSize: 24, fontWeight: '500',  }}>Nome do exercício</Text>
+                        <TextInput style={{ fontSize: 24, fontWeight: '500',  }}
+                        placeholder='Exercício'
+                        ></TextInput>
                     </View>
                     <TouchableOpacity style={styles.addExerc}>
                         <Image 
@@ -147,7 +149,6 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 7,
         marginHorizontal: 10,
 
     },

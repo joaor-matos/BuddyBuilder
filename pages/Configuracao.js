@@ -13,9 +13,9 @@ function Configuracao({ navigation }) {
         <View style={styles.container}>
             <View style={{ justifyContent: 'flex-end', alignItems: 'flex-end', paddingHorizontal: 20, }}>
             <TouchableOpacity style={styles.btnHome} activeOpacity={0.9}
-                onPress={() => navigation.navigate('Configuracao')}>
+                onPress={() => navigation.navigate('HomeScreen')}>
                 <Image
-                    source={require('../images/menu.png')}
+                    source={require('../images/treino.png')}
                     style={styles.iconHome}
                 />
             </TouchableOpacity>
@@ -36,9 +36,11 @@ function Configuracao({ navigation }) {
             </View>
             <View style={styles.conta}>
                 <Text style={styles.text}>Configurações</Text>
-                <TouchableOpacity style={styles.btn}><Text style={{ fontSize: 20, fontWeight: "500" }}>Apelido</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.btn}><Text style={{ fontSize: 20, fontWeight: "500" }}>Calculo IMC</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.btn}><Text style={{ fontSize: 20, fontWeight: "500" }}>Gerenciar treinos</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btn} activeOpacity={0.9}><Text style={{ fontSize: 20, fontWeight: "500" }}>Apelido</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btn} activeOpacity={0.9}
+                onPress={() => navigation.navigate('IMC')}><Text style={{ fontSize: 20, fontWeight: "500" }}>Calculo IMC</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btn} activeOpacity={0.9}
+                onPress={() => navigation.navigate('GerenciarTreinos')}><Text style={{ fontSize: 20, fontWeight: "500" }}>Gerenciar treinos</Text></TouchableOpacity>
             </View>
         </View>
     )
@@ -101,5 +103,6 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 5,
+        transform: [{rotate: '15deg'}]
     },
 })

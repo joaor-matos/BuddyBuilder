@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { cloneElement, startTransition } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
+import { FontAwesome6 } from '@expo/vector-icons';
 
 // Componentes
 import Cronometro from './components/Cronometro';
@@ -25,9 +26,44 @@ import GerenciarTreinos from './pages/GerenciarTreinos';
 function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
+      <StatusBar style="auto" />
       <View style={styles.menu}>
+        <View style={styles.streakView}>
+          <Text style={{ fontSize: 40, fontWeight: '700', marginHorizontal: 10, }}>0</Text>
+          <FontAwesome6 name="fire" size={44} color="black" />
+        </View>
+
         <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
           onPress={() => navigation.navigate('Configuracao')}>
+          <Image
+            source={require('./images/menu.png')}
+            style={styles.iconMenu}
+          />
+        </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity style={styles.btnTreino} activeOpacity={0.9}
+        onPress={() => navigation.navigate('TreinoScreen')}>
+          <Text style={{ fontFamily: 'Inter-Bold', fontSize: 30 }}>TREINO A</Text>
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity style={styles.btnAddExerc} activeOpacity={0.9}
+      onPress={() => navigation.navigate('CriarTreino')}>
+        <Image
+          source={require('./images/plus.png')}
+          style={styles.addIcon}
+        />
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
+}
+
+
+function TreinoScreen({ navigation }) {
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
+      <View style={styles.menu}>
+        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}>
           <View style={{ backgroundColor: '#549E48', height: '60%', width: '60%', borderRadius: 6, }} />
         </TouchableOpacity>
 
@@ -68,9 +104,20 @@ function HomeScreen({ navigation }) {
 
 function IMCScreen({ navigation }) {
   return (
-    <View style={{ backgroundColor: '#182649', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <IMC />
+    <View style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column', padding: 20, marginTop: 40,  }}>
+      <StatusBar style="auto" />
+      <View style={styles.headerIMC}>
+        <Text style={{ color: '#F0F0F0', fontSize: 40, fontWeight: '600', fontFamily: 'Inter-Bold', paddingBottom: 20, alignSelf: 'flex-start' }}>IMC</Text>
+        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+          onPress={() => navigation.navigate('Configuracao')}>
+          <Image
+            source={require('./images/menu.png')}
+            style={styles.iconMenu}
+          />
+        </TouchableOpacity>
       </View>
+      <IMC />
+    </View>
   )
 }
 
@@ -83,12 +130,12 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='CriarTreino'>
-        <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
+      <Stack.Navigator initialRouteName='HomeScreen'>
+        <Stack.Screen options={{ headerShown: false }} name='HomeScreen' component={HomeScreen} />
+        <Stack.Screen options={{ headerShown: false }} name='TreinoScreen' component={TreinoScreen} />
         <Stack.Screen options={{ headerShown: false }} name='Configuracao' component={ConfigScreen} />
-        <Stack.Screen options={{ headerShown: true }} name='IMC' component={IMCScreen} />
+        <Stack.Screen options={{ headerShown: false }} name='IMC' component={IMCScreen} />
         <Stack.Screen options={{ headerShown: false }} name='CriarTreino' component={CriarTreino} />
-        <Stack.Screen options={{ headerShown: true }} name='Treino' component={Treino} />
         <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
         <Stack.Screen options={{ headerShown: false }} name='Cadastro' component={Cadastro} />
         <Stack.Screen options={{ headerShown: false }} name='GerenciarTreinos' component={GerenciarTreinos} />
@@ -107,6 +154,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'row',
     padding: 10,
+    marginBottom: 10,
   },
   navegar: {
     flexDirection: 'row',
@@ -118,6 +166,58 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 5,
   },
+  streakView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#D9D9D9',
+    borderColor: '#fff',
+    height: 70,
+    width: 140,
+    borderRadius: 10,
+  },
+
+  btnTreino: {
+    fontSize: 20,
+    backgroundColor: '#F0F0F0',
+    borderRadius: 6,
+    padding: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 'auto',
+    borderColor: '#D9D9D9',
+    borderWidth: 8,
+    marginHorizontal: 14,
+
+  },
+
+  btnAddExerc: {
+    height: 60,
+    width: 60,
+    marginTop: 14,
+    backgroundColor: '#F0F0F0',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    alignSelf: 'center',
+  },
+
+  addIcon: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    width: 40,
+    borderRadius: 5,
+  },
+
+  headerIMC: {
+    backgroundColor: '#182649',
+    justifyContent: 'center',
+    paddingLeft: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+
   bttnHome: {
     flexDirection: 'row',
     alignItems: 'center',

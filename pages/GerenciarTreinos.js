@@ -50,7 +50,7 @@ const AdicionarExerc = () => {
     );
 };
 
-const GerenciarTreinos = () => {
+function GerenciarTreinos({navigation}) {
 
     const [listForm, setListForm] = useState([]);
 
@@ -62,7 +62,8 @@ const GerenciarTreinos = () => {
         <View style={{ backgroundColor: '#182649', flex: 1, paddingVertical: 50, /* justifyContent: 'space-between' */ }}>
             <View style={styles.header}>
                 <Text style={{ color: '#F0F0F0', fontSize: 40, fontWeight: '600', fontFamily: 'Inter-Bold', paddingBottom: 20, alignSelf: 'flex-start' }}>Gerenciar</Text>
-                <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}>
+                <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+                onPress={() => navigation.navigate('Configuracao')}>
                     <Image
                         source={require('../images/menu.png')}
                         style={styles.iconMenu}
@@ -87,6 +88,8 @@ const GerenciarTreinos = () => {
         </View >
     )
 }
+
+export default GerenciarTreinos;
 
 const styles = StyleSheet.create({
     container: {
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch',
-        width: 'auto',
+        width: 300,
 
     },
     icon: {
@@ -150,4 +153,3 @@ const styles = StyleSheet.create({
     },
 });
 
-export default GerenciarTreinos;
