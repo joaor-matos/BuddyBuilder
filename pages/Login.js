@@ -1,33 +1,68 @@
-import React from "react";
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, Image, } from "react-native";
+import { useState } from "react";
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator, } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaView } from "react-native-safe-area-context";
-
-const LoginScreen = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = () => {
-    // implementar lógica de validação do lado do cliente e armazenamento de dados
-  };
-};
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Login({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("http://localhost:3000/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, senha }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        const token = data.token;
+        await AsyncStorage.setItem('token', token);
+        navigation.navigate('HomeScreen');
+      } else {
+        console.error("Credenciais inválidas");
+      }
+    } catch (error) {
+      console.error("Erro ao fazer login: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <SafeAreaView style={{ alignItems: "center", justifyContent: "space-between", flex: 1 }} >
       <View style={styles.logoContainer} />
-      <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }} /*style={styles.container}*/>
-        {/* <TextInput style={styles.inputEmail} placeholder="E-mail" onChangeText={(text) => setEmail(text)} value={email} /> */}
-        <TextInput style={styles.input} placeholder="E-mail" />
-        {/* <TextInput style={styles.inputPassword} placeholder="Senha" onChangeText={(text) => setPassword(text)} value={password} /> */}
-        <TextInput style={styles.input} placeholder="Senha" />
+      <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }} >
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          value={senha}
+          onChangeText={setSenha}
+          secureTextEntry
+        />
         <View style={{ margin: 50 }}>
-          <TouchableOpacity style={styles.btn}
-          onPress={() => navigation.navigate('HomeScreen')}>
-            <Text style={{ fontSize: 20, fontWeight: "bold", }}>Login</Text>
-          </TouchableOpacity>
+          {loading ? (
+            <ActivityIndicator size="large" color="#0000FF" />
+          ) : (
+            <TouchableOpacity style={styles.btn} onPress={handleLogin}>
+              <Text style={{ fontSize: 20, fontWeight: "bold", }}>Login</Text>
+            </TouchableOpacity>
+          )}
 
           <TouchableOpacity style={styles.btn}
           onPress={() => navigation.navigate('Cadastro')}>
@@ -40,8 +75,6 @@ function Login({ navigation }) {
 }
 
 export default Login;
-
-// export default Login;
 
 const styles = StyleSheet.create({
   container: {
