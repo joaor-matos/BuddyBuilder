@@ -10,10 +10,12 @@ function Login({ navigation }) {
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/users/login", {
+      const response = await fetch(`http://${baseUrl}:3000/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

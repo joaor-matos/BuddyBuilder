@@ -7,6 +7,8 @@ function CadastroScreen({ navigation }) {
   const [senha, setSenha] = useState('');
   const [confirmSenha, setConfirmSenha] = useState('');
 
+  const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+
   const handleSignUp = async () => {
     try {
       if (senha !== confirmSenha) {
@@ -14,7 +16,7 @@ function CadastroScreen({ navigation }) {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/users/register", {
+      const response = await fetch(`http://${baseUrl}:3000/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,13 +24,15 @@ function CadastroScreen({ navigation }) {
         body: JSON.stringify({ email, apelido, senha }),
       });
 
-      const data = await response.json();
       if (response.ok) {
-        Alert.alert("Cadastro realizado com sucesso!", "Você pode fazer login agora.", [
-          { text: "OK", onPress: () => navigation.navigate('Login') },
-        ]);
-        navigation.navigate('Login');
+        const responseData = await response.json();
+        if (responseData) {
+          navigation.navigate('Login');
+        } else {
+          Alert.alert("Erro ao cadastrar", "Ocorreu um erro ao tentar cadastrar. Por favor, tente novamente.");
+        }
       } else {
+        const data = await response.json();
         if (data && data.error) {
           Alert.alert("Erro ao cadastrar", data.error);
         } else {
@@ -81,7 +85,7 @@ function CadastroScreen({ navigation }) {
           onSubmitEditing={handleSignUp}
         />
 
-        <TouchableOpacity style={styles.btnCadastro} onPress={[handleSignUp, () => navigation.navigate('Login')]}>
+        <TouchableOpacity style={styles.btnCadastro} onPress={handleSignUp}>
           <Text style={{ fontWeight: "bold", textAlign: 'center', fontSize: 20, }}>Concluir cadastro</Text>
         </TouchableOpacity>
 
