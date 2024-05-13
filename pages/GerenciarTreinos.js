@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 5,
-        color: '#707070'
     },
     bttnMenu: {
         alignItems: 'center',
