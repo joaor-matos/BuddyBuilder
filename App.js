@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, ScrollView, ImageBackground, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { cloneElement, startTransition } from 'react';
+import { cloneElement, startTransition, Suspense, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import { FontAwesome6 } from '@expo/vector-icons';
@@ -22,40 +22,64 @@ import ConfigScreen from './pages/Configuracao';
 import CalculoIMC from './pages/CalculoIMC';
 import Treino from './pages/Treino';
 import GerenciarTreinos from './pages/GerenciarTreinos';
+import { getUserById } from './lib/data';
+import { ActivityIndicator } from 'react-native-web';
 
-function HomeScreen({ navigation }) {
+async function HomeScreen({ navigation, route }) {
+  const token = await AsyncStorage.getItem("token");
+  const { id } = route.params;
+
+  // try {
+  const user = await getUserById(id, token);
+
+  if (!user) {
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
+        <Text>Usuário não encontrado.</Text>
+      </SafeAreaView>
+    )
+  }
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
-      <StatusBar style="auto" />
-      <View style={styles.menu}>
-        <View style={styles.streakView}>
-          <Text style={{ fontSize: 40, fontWeight: '700', marginHorizontal: 10, }}>0</Text>
-          <FontAwesome6 name="fire" size={44} color="black" />
-        </View>
+    <Suspense fallback={<ActivityIndicator size="large" color="#0000FF" />}>
+      <SafeAreaView key={user.id} style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
+        <StatusBar style="auto" />
+        <View style={styles.menu}>
+          <View style={styles.streakView}>
+            <Text style={{ fontSize: 40, fontWeight: '700', marginHorizontal: 10, }}>0</Text>
+            <FontAwesome6 name="fire" size={44} color="black" />
+          </View>
 
-        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
-          onPress={() => navigation.navigate('Configuracao')}>
+          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+            onPress={() => navigation.navigate('Configuracao')}>
+            <Image
+              source={require('./images/menu.png')}
+              style={styles.iconMenu}
+            />
+          </TouchableOpacity>
+        </View>
+        {user?.usuario_com_treinos.map((treino) => (
+          <View key={treino?.id}>
+            <TouchableOpacity style={styles.btnTreino} activeOpacity={0.9}
+              onPress={() => navigation.navigate('TreinoScreen')}>
+              <Text style={{ fontSize: 30 }}>{treino?.nome_treino}</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+        <TouchableOpacity style={styles.btnAddExerc} activeOpacity={0.9}
+          onPress={() => navigation.navigate('CriarTreino')}>
           <Image
-            source={require('./images/menu.png')}
-            style={styles.iconMenu}
+            source={require('./images/plus.png')}
+            style={styles.addIcon}
           />
         </TouchableOpacity>
-      </View>
-      <View>
-        <TouchableOpacity style={styles.btnTreino} activeOpacity={0.9}
-        onPress={() => navigation.navigate('TreinoScreen')}>
-          <Text style={{ fontSize: 30 }}>TREINO A</Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity style={styles.btnAddExerc} activeOpacity={0.9}
-      onPress={() => navigation.navigate('CriarTreino')}>
-        <Image
-          source={require('./images/plus.png')}
-          style={styles.addIcon}
-        />
-      </TouchableOpacity>
-    </SafeAreaView>
+      </SafeAreaView>
+    </Suspense >
   );
+  // } catch (error) {
+  //   console.error("Erro ao buscar os dados do usuário: ", error);
+  // }
+
 }
 
 
@@ -104,7 +128,7 @@ function TreinoScreen({ navigation }) {
 
 function IMCScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column', padding: 20, marginTop: 40,  }}>
+    <View style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column', padding: 20, marginTop: 40, }}>
       <StatusBar style="auto" />
       <View style={styles.headerIMC}>
         <Text style={{ color: '#F0F0F0', fontSize: 40, fontWeight: '600', paddingBottom: 20, alignSelf: 'flex-start' }}>IMC</Text>
