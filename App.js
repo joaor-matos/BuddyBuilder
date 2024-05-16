@@ -7,6 +7,7 @@ import { cloneElement, startTransition, Suspense, useEffect, useState } from 're
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import { FontAwesome6 } from '@expo/vector-icons';
+import { ActivityIndicator } from 'react-native-web';
 
 // Componentes
 import Cronometro from './components/Cronometro';
@@ -23,25 +24,45 @@ import CalculoIMC from './pages/CalculoIMC';
 import Treino from './pages/Treino';
 import GerenciarTreinos from './pages/GerenciarTreinos';
 import { getUserById } from './lib/data';
-import { ActivityIndicator } from 'react-native-web';
 
-async function HomeScreen({ navigation, route }) {
-  const token = await AsyncStorage.getItem("token");
-  const { id } = route.params;
+function HomeScreen({ navigation }) {
+  const [user, setUser] = useState(null);
 
-  // try {
-  const user = await getUserById(id, token);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        const userId = await AsyncStorage.getItem("userId");
+
+        if (userId) {
+          const userDataFromServer = await getUserById(parseInt(userId), token);
+          setUser(userDataFromServer);
+        } else {
+          console.log("ID do usuário não encontrado no AsyncStorage")
+        }
+
+      } catch (error) {
+        console.error("Erro ao obter dados do usuário: ", error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   if (!user) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Usuário não encontrado.</Text>
-      </SafeAreaView>
+      </View>
     )
   }
 
   return (
-    <Suspense fallback={<ActivityIndicator size="large" color="#0000FF" />}>
+    <Suspense fallback={(
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000FF" />
+      </View>)}
+    >
       <SafeAreaView key={user.id} style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
         <StatusBar style="auto" />
         <View style={styles.menu}>
@@ -58,10 +79,10 @@ async function HomeScreen({ navigation, route }) {
             />
           </TouchableOpacity>
         </View>
-        {user?.usuario_com_treinos.map((treino) => (
+        {user?.treinos && user.treinos.map((treino) => (
           <View key={treino?.id}>
             <TouchableOpacity style={styles.btnTreino} activeOpacity={0.9}
-              onPress={() => navigation.navigate('TreinoScreen')}>
+              onPress={() => navigation.navigate('TreinoScreen', { treinoId: treino?.id })}>
               <Text style={{ fontSize: 30 }}>{treino?.nome_treino}</Text>
             </TouchableOpacity>
           </View>
@@ -74,12 +95,8 @@ async function HomeScreen({ navigation, route }) {
           />
         </TouchableOpacity>
       </SafeAreaView>
-    </Suspense >
+    </Suspense>
   );
-  // } catch (error) {
-  //   console.error("Erro ao buscar os dados do usuário: ", error);
-  // }
-
 }
 
 
@@ -212,7 +229,6 @@ const styles = StyleSheet.create({
     borderColor: '#D9D9D9',
     borderWidth: 8,
     marginHorizontal: 14,
-
   },
 
   btnAddExerc: {
