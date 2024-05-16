@@ -72,7 +72,7 @@ function HomeScreen({ navigation }) {
           </View>
 
           <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
-            onPress={() => navigation.navigate('Configuracao')}>
+            onPress={() => navigation.navigate('Configuracao', { userId: user.id })}>
             <Image
               source={require('./images/menu.png')}
               style={styles.iconMenu}
@@ -101,45 +101,79 @@ function HomeScreen({ navigation }) {
 
 
 function TreinoScreen({ navigation }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        const userId = await AsyncStorage.getItem("userId");
+
+        if (userId) {
+          const userDataFromServer = await getUserById(parseInt(userId), token);
+          setUser(userDataFromServer);
+        } else {
+          console.log("ID do usuário não encontrado no AsyncStorage")
+        }
+
+      } catch (error) {
+        console.error("Erro ao obter dados do usuário: ", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (!user) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Usuário não encontrado.</Text>
+      </View>
+    )
+  }
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
-      <View style={styles.menu}>
-        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}>
-          <View style={{ backgroundColor: '#549E48', height: '60%', width: '60%', borderRadius: 6, }} />
-        </TouchableOpacity>
+    <Suspense fallback={(
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000FF" />
+      </View>)}
+    >
+      <SafeAreaView key={user.id} style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
+        <View style={styles.menu}>
+          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}>
+            <View style={{ backgroundColor: '#549E48', height: '60%', width: '60%', borderRadius: 6, }} />
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.timerTreino} activeOpacity={0.9}>
-          <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>0:00:00</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.timerTreino} activeOpacity={0.9}>
+            <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>0:00:00</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
-          onPress={() => navigation.navigate('Configuracao')}>
-          <Image
-            source={require('./images/menu.png')}
-            style={styles.iconMenu}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity key={user.id} style={styles.bttnMenu} activeOpacity={0.9}
+            onPress={() => navigation.navigate('Configuracao', { userId: user.id })}>
+            <Image
+              source={require('./images/menu.png')}
+              style={styles.iconMenu}
+            />
+          </TouchableOpacity>
 
-        <StatusBar style="auto" />
+          <StatusBar style="auto" />
 
-      </View>
-      <View style={styles.viewTreino}>
-        <ScrollView style={styles.scrollTreino}>
-          <Exercicio nomeExerc='ESTEIRA' />
-          <Exercicio nomeExerc='AGACHAMENTO BARRA' />
-          <Exercicio nomeExerc='ELEVAÇÃO PÉLVICA' />
-          <Exercicio nomeExerc='CADEIRA EXTENSORA + AGACHAMENTO DESLOCADO' />
-          <Exercicio nomeExerc='CADEIRA FLEXORA' />
-          <Exercicio nomeExerc='PANTURRILHA BURRINHO' />
-        </ScrollView>
-      </View>
+        </View>
+        <View style={styles.viewTreino}>
+          <ScrollView style={styles.scrollTreino}>
+            {user?.treinos.exercicios && user.treinos.exercicios.map((exercicio) => {
+              <Exercicio nomeExerc={exercicio?.nome_exercicio} />
+            })}
+          </ScrollView>
+        </View>
 
-      <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, margin: 5, }}>
-        <Temporizador />
-        <Cronometro />
-      </View>
+        <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, margin: 5, }}>
+          <Temporizador />
+          <Cronometro />
+        </View>
 
-    </SafeAreaView>
+      </SafeAreaView>
+    </Suspense>
   );
 }
 
