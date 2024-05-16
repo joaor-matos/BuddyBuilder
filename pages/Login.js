@@ -72,6 +72,12 @@ function Login({ navigation }) {
           onPress={() => navigation.navigate('Cadastro')}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>Cadastrar-se</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.btn}
+          onPress={() => navigation.navigate('HomeScreen')}>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Home</Text>
+          </TouchableOpacity>
+
         </View>
       </View>
     </SafeAreaView>

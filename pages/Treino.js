@@ -1,75 +1,104 @@
 import { useState } from "react";
-import { View, TextInput, TouchableOpacity, StyleSheet, Image, Text } from "react-native";
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, ScrollView, ImageBackground, TextInput } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
-export default function CriarTrieno({ navigation }) {
-    const [nomeTreino, setNomeTreino] = useState("");
-    const [exercicio, setExercicio] = useState("");
-    const [quantRepeticao, setQuantRepeticao] = useState(0);
-    const [quantSets, setQuantSets] = useState(0);
-    const [descricao, setDescricao] = useState("");
+import Cronometro from '../components/Cronometro';
+import Exercicio from '../components/Exercicio';
+import Temporizador from '../components/Temporizador';
 
-    const handleCreate = () => {
-        // Criar a lógica do botão de criar novas listas
-    }
-
-    const handleFinally = () => {
-        // Criar a lógica do botão para finalizar a criação dos treinos
-    }
-
+function Treino({ navigation }) {
+    
     return (
-        <View style={styles.container}>
-            <View style={styles.treino}>
-                <TextInput style={styles.inputTreino} value={nomeTreino} keyboardType="text" onChange={(text) => setNomeTreino(text)} placeholder="Nome do Treino" />
-            </View>
-            <View>
-                <TextInput value={exercicio} onChange={(text) => setExercicio(text)} keyboardType="text" placeholder="Exercício" />
-                <TextInput value={quantRepeticao} onChange={(text) => setQuantRepeticao(text)} keyboardType="number" placeholder="Repetições" />
-                <TextInput value={quantSets} onChange={(text) => setQuantSets(text)} keyboardType="number" placeholder="Sets" />
-                <TextInput value={descricao} onChange={(text) => setDescricao(text)} keyboardType="text" placeholder="Descrição" />
-            </View>
-
-            <TouchableOpacity onPress={handleCreate}><Image source={"../svg/plus.svg"} alt="Adicionar exercício"/></TouchableOpacity>
-
-            <TouchableOpacity onPress={handleFinally}>
-                <Text style={styles.btn}>Finalizar</Text>
-            </TouchableOpacity>
-
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
+        <View style={styles.menu}>
+          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}>
+            <View style={{ backgroundColor: '#549E48', height: '60%', width: '60%', borderRadius: 6, }} />
+          </TouchableOpacity>
+  
+          <TouchableOpacity style={styles.timerTreino} activeOpacity={0.9}>
+            <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>0:00:00</Text>
+          </TouchableOpacity>
+  
+          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+            onPress={() => navigation.navigate('Configuracao')}>
+            <Image
+              source={require('../images/menu.png')}
+              style={styles.iconMenu}
+            />
+          </TouchableOpacity>
+  
+          <StatusBar style="auto" />
+  
         </View>
-    )
+        <View style={styles.viewTreino}>
+          <ScrollView style={styles.scrollTreino}>
+            <Exercicio nomeExerc='ESTEIRA' />
+            <Exercicio nomeExerc='AGACHAMENTO BARRA' />
+            <Exercicio nomeExerc='ELEVAÇÃO PÉLVICA' />
+            <Exercicio nomeExerc='CADEIRA EXTENSORA + AGACHAMENTO DESLOCADO' />
+            <Exercicio nomeExerc='CADEIRA FLEXORA' />
+            <Exercicio nomeExerc='PANTURRILHA BURRINHO' />
+          </ScrollView>
+        </View>
+  
+        <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, margin: 5, }}>
+          <Temporizador />
+          <Cronometro />
+        </View>
+  
+      </SafeAreaView>
+    );
 }
 
+export default Treino;
+
 const styles = StyleSheet.create({
-    container: {
-        flex: 0.5,
-        justifyContent: 'center',
+    menu: {
+        marginTop: 40,
         alignItems: 'center',
-        marginTop: 20,
-        backgroundColor: '#182649'
-    },
-    treino: {
-        flex: 0.5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 10
-    },
-    inputTreino: {
-        color: "#000000",
-        fontSize: 20,
-        borderRadius: 10,
+        backgroundColor: '#182649',
+        justifyContent: 'space-around',
+        flexDirection: 'row',
         padding: 10,
         marginBottom: 10,
-        marginHorizontal: 2
-    },
-    btn: {
-        width: 200,
-        padding: 12,
-        borderRadius: 8,
-        alignItems: "center",
+      },
+    bttnMenu: {
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: '#D9D9D9',
-        color: "777777",
-        justifyContent: "center",
-        elevation: 2,
-        marginTop: 15,
-        textAlign: 'center'
-    }
+        borderColor: '#fff',
+        height: 70,
+        width: 70,
+        borderRadius: 10,
+      },
+    
+      timerTreino: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#D9D9D9',
+        borderColor: '#fff',
+        height: 70,
+        borderRadius: 10,
+      },
+      viewTreino: {
+
+        alignSelf: 'center',
+        backgroundColor: '#D9D9D9',
+        marginHorizontal: 'auto',
+        justifyContent: 'center',
+        borderRadius: 10,
+        width: 390,
+        alignItems: 'center',
+        flexDirection: 'column',
+      },
+      scrollTreino: {
+        height: 260,
+      },
+      iconMenu: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 60,
+        width: 60,
+        borderRadius: 5,
+      },
 })
