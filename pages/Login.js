@@ -28,7 +28,8 @@ function Login({ navigation }) {
         const token = data.token;
         const id = data.id;
         await AsyncStorage.setItem('token', token);
-        navigation.navigate('HomeScreen', { id });
+        await AsyncStorage.setItem('userId', id.toString());
+        navigation.navigate('HomeScreen');
       } else {
         console.error("Credenciais inválidas");
       }
