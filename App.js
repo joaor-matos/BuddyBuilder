@@ -205,9 +205,9 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
+      <Stack.Navigator initialRouteName='Treino'>
         <Stack.Screen options={{ headerShown: false }} name='HomeScreen' component={HomeScreen} />
-        <Stack.Screen options={{ headerShown: false }} name='TreinoScreen' component={TreinoScreen} />
+        <Stack.Screen options={{ headerShown: false }} name='Treino' component={Treino} />
         <Stack.Screen options={{ headerShown: false }} name='Configuracao' component={ConfigScreen} />
         <Stack.Screen options={{ headerShown: false }} name='IMC' component={IMCScreen} />
         <Stack.Screen options={{ headerShown: false }} name='CriarTreino' component={CriarTreino} />
@@ -350,21 +350,6 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     justifyContent: 'center',
   },
-
-  viewTreino: {
-
-    alignSelf: 'center',
-    backgroundColor: '#D9D9D9',
-    marginHorizontal: 'auto',
-    justifyContent: 'center',
-    borderRadius: 10,
-    width: 390,
-    alignItems: 'center',
-    flexDirection: 'column',
-  },
-  scrollTreino: {
-    height: 260,
-  },
   viewExerc: {
     marginTop: 5,
     backgroundColor: '#636363',
@@ -400,5 +385,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     elevation: 2,
     marginTop: 10,
+  },
+  viewTreino: {
+
+    alignSelf: 'center',
+    backgroundColor: '#D9D9D9',
+    marginHorizontal: 'auto',
+    justifyContent: 'center',
+    borderRadius: 10,
+    width: 390,
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  scrollTreino: {
+    height: 260,
   },
 });
