@@ -1,19 +1,52 @@
 //Componentes
 import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native"
+import { useState, useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
+import { getUserById } from "../lib/data";
 
 //Páginas
 import CalculoIMC from './CalculoIMC';
 
 function Configuracao({ navigation }) {
+    const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        const userId = await AsyncStorage.getItem("userId");
+
+        if (userId) {
+          const userDataFromServer = await getUserById(parseInt(userId), token);
+          setUser(userDataFromServer);
+        } else {
+          console.log("ID do usuário não encontrado no AsyncStorage")
+        }
+
+      } catch (error) {
+        console.error("Erro ao obter dados do usuário: ", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (!user) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Usuário não encontrado.</Text>
+      </View>
+    )
+  }
 
     return (
-        <View style={styles.container}>
+        <View key={user?.id} style={styles.container}>
             <View style={{ justifyContent: 'flex-end', alignItems: 'flex-end', paddingHorizontal: 20, }}>
             <TouchableOpacity style={styles.btnHome} activeOpacity={0.9}
-                onPress={() => navigation.navigate('HomeScreen')}>
+                onPress={() => navigation.navigate('HomeScreen', { userId: user?.id })}>
                 <Image
                     source={require('../images/treino.png')}
                     style={styles.iconHome}
@@ -28,9 +61,9 @@ function Configuracao({ navigation }) {
                 />
 
                 <View>
-                    <Text style={{ fontSize: 18, marginBottom: 8, fontWeight: '700' }}>nome_usuario</Text>
+                    <Text style={{ fontSize: 18, marginBottom: 8, fontWeight: '700' }}>{user?.apelido}</Text>
                     <Text style={{ fontSize: 18 }}>Dias ativo: </Text>
-                    <Text style={{ fontSize: 18 }}>IMC: </Text>
+                    <Text style={{ fontSize: 18 }}>IMC: {user?.imc}</Text>
                 </View>
 
             </View>
