@@ -1,13 +1,13 @@
 //Elementos
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, ScrollView, ImageBackground, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, ScrollView, ImageBackground, TextInput, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { cloneElement, startTransition, Suspense, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { ActivityIndicator } from 'react-native-web';
+import { getUserById } from './lib/data';
 
 // Componentes
 import Cronometro from './components/Cronometro';
@@ -23,7 +23,6 @@ import ConfigScreen from './pages/Configuracao';
 import CalculoIMC from './pages/CalculoIMC';
 import Treino from './pages/Treino';
 import GerenciarTreinos from './pages/GerenciarTreinos';
-import { getUserById } from './lib/data';
 
 function HomeScreen({ navigation }) {
   const [user, setUser] = useState(null);
@@ -79,14 +78,16 @@ function HomeScreen({ navigation }) {
             />
           </TouchableOpacity>
         </View>
-        {user?.treinos && user.treinos.map((treino) => (
-          <View key={treino?.id}>
-            <TouchableOpacity style={styles.btnTreino} activeOpacity={0.9}
-              onPress={() => navigation.navigate('TreinoScreen', { treinoId: treino?.id })}>
-              <Text style={{ fontSize: 30 }}>{treino?.nome_treino}</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
+        <ScrollView>
+          {user?.treinos && user.treinos.map((treino) => (
+            <View key={treino?.id}>
+              <TouchableOpacity style={styles.btnTreino} activeOpacity={0.9}
+                onPress={() => navigation.navigate('Treino', { treinoId: treino?.id, exercicios: treino?.exercicios })}>
+                <Text style={{ fontSize: 30 }}>{treino?.nome_treino}</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
         <TouchableOpacity style={styles.btnAddExerc} activeOpacity={0.9}
           onPress={() => navigation.navigate('CriarTreino')}>
           <Image
@@ -161,9 +162,7 @@ function TreinoScreen({ navigation }) {
         </View>
         <View style={styles.viewTreino}>
           <ScrollView style={styles.scrollTreino}>
-            {user?.treinos.exercicios && user.treinos.exercicios.map((exercicio) => {
-              <Exercicio nomeExerc={exercicio?.nome_exercicio} />
-            })}
+            <Exercicio />
           </ScrollView>
         </View>
 
@@ -205,7 +204,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Treino'>
+      <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen options={{ headerShown: false }} name='HomeScreen' component={HomeScreen} />
         <Stack.Screen options={{ headerShown: false }} name='Treino' component={Treino} />
         <Stack.Screen options={{ headerShown: false }} name='Configuracao' component={ConfigScreen} />
