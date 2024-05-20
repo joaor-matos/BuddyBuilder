@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator, } from "react-native";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -29,7 +27,7 @@ function Login({ navigation }) {
         const id = data.id;
         await AsyncStorage.setItem('token', token);
         await AsyncStorage.setItem('userId', id.toString());
-        navigation.navigate('HomeScreen');
+        navigation.navigate('Home');
       } else {
         console.error("Credenciais inválidas");
       }
@@ -43,7 +41,7 @@ function Login({ navigation }) {
   return (
     <SafeAreaView style={{ alignItems: "center", justifyContent: "space-between", flex: 1 }} >
       <View style={styles.logoContainer} />
-      <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }} >
+      <View style={{ alignItems: "center", justifyContent: "center", marginTop: 20 }} >
         <TextInput
           style={styles.input}
           placeholder="E-mail"
@@ -97,7 +95,6 @@ const styles = StyleSheet.create({
     width: 300,
     height: 40,
     borderRadius: 5,
-
     backgroundColor: '#D9D9D9',
     borderColor: '#BFBFBF',
     borderWidth: 1,

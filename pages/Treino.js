@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Suspense } from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image, SafeAreaView, ScrollView, ImageBackground, TextInput, ActivityIndicator } from 'react-native';
+import React, { Suspense } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRoute } from "@react-navigation/native";
 
@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
     width: 70,
     borderRadius: 10,
   },
-
   timerTreino: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -95,7 +94,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   viewTreino: {
-
     alignSelf: 'center',
     backgroundColor: '#D9D9D9',
     marginHorizontal: 'auto',
@@ -106,7 +104,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   scrollTreino: {
-    height: 260,
+    height: 220,
   },
   iconMenu: {
     alignItems: 'center',
