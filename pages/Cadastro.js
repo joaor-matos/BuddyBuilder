@@ -1,21 +1,31 @@
 import { useState } from "react";
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from "react-native";
 
 function CadastroScreen({ navigation }) {
   const [apelido, setApelido] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [confirmSenha, setConfirmSenha] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const baseUrl = process.env.EXPO_PUBLIC_API_URL;
 
   const handleSignUp = async () => {
-    try {
-      if (senha !== confirmSenha) {
-        Alert.alert("Erro ao cadastrar", "As senhas não coincidem.");
-        return;
-      }
+    if (senha !== confirmSenha) {
+      Alert.alert("Erro ao cadastrar", "As senhas não coincidem.");
+      return;
+    }
 
+    if (!apelido || !email || !senha || !confirmSenha) {
+      Alert.alert("Erro ao cadastrar", "Todos os campos são obrigatórios.");
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    try {
       const response = await fetch(`http://${baseUrl}:3000/users/register`, {
         method: "POST",
         headers: {
@@ -24,24 +34,27 @@ function CadastroScreen({ navigation }) {
         body: JSON.stringify({ email, apelido, senha }),
       });
 
+      let responseData;
+      try {
+        responseData = await response.json();
+        
+      } catch (error) {
+        responseData = null;
+      }
+      
+      setLoading(false);
+
       if (response.ok) {
-        const responseData = await response.json();
-        if (responseData) {
-          navigation.navigate('Login');
-        } else {
-          Alert.alert("Erro ao cadastrar", "Ocorreu um erro ao tentar cadastrar. Por favor, tente novamente.");
-        }
+        Alert.alert("Sucesso", "Cadastro realizado com sucesso!", [
+          { text: "OK", onPress: () => navigation.navigate("Login") }
+        ]);
       } else {
-        const data = await response.json();
-        if (data && data.error) {
-          Alert.alert("Erro ao cadastrar", data.error);
-        } else {
-          Alert.alert("Erro ao cadastrar", "Ocorreu um erro ao tentar cadastrar. Por favor, tente novamente.");
-        }
+        setError(responseData?.error || "Ocorreu um erro ao tentar cadastrar. Por favor, tente novamente.")
       }
     } catch (error) {
+      setLoading(false);
       console.error("Erro ao fazer cadastro: ", error);
-      Alert.alert("Erro ao cadastrar", "Ocorreu um erro ao tentar cadastrar. Por favor, tente novamente.");
+      setError("Ocorreu um erro ao tentar cadastrar. Por favor, tente novamente.");
     }
   };
 
@@ -85,8 +98,9 @@ function CadastroScreen({ navigation }) {
           onSubmitEditing={handleSignUp}
         />
 
-        <TouchableOpacity style={styles.btnCadastro} onPress={handleSignUp}>
-          <Text style={{ fontWeight: "bold", textAlign: 'center', fontSize: 20, }}>Concluir cadastro</Text>
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
+        <TouchableOpacity style={styles.btnCadastro} onPress={handleSignUp} disabled={loading}>
+          {loading ? <ActivityIndicator color={"#FFF"} /> : <Text style={{ fontWeight: "bold", textAlign: 'center', fontSize: 20, }}>Concluir cadastro</Text>}
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -189,6 +203,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter',
     fontSize: 20,
     fontWeight: "400",
+  },
+  errorText: {
+    color: "#FF0000",
+    marginBottom: 16,
   },
 })
 
