@@ -2,6 +2,7 @@ import React, { Suspense, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRoute } from "@react-navigation/native";
+import { useState, useEffect } from 'react';
 
 import Cronometro from '../components/Cronometro';
 import Exercicio from '../components/Exercicio';
@@ -84,6 +85,8 @@ function Treino({ navigation }) {
         <ActivityIndicator size="large" color="#0000FF" />
       </View>)}
     >
+
+
       <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
         <View style={styles.menu}>
           <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9} onPress={startTimer} >
@@ -105,6 +108,7 @@ function Treino({ navigation }) {
         </View>
         <View style={styles.viewTreino}>
           <ScrollView style={styles.scrollTreino}>
+            {exercicios.map((exercicio) =>
             {exercicios.map((exercicio) =>
               <Exercicio key={exercicio?.id} exercicio={exercicio} />
             )}
