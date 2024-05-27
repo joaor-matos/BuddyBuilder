@@ -51,34 +51,54 @@ const AdicionarExerc = () => {
 };
 
 const CriarTreino = () => {
-
     const [listForm, setListForm] = useState([]);
+    const [exercicios, setExercicios] = useState([1]);
 
     const addExercForm = () => {
         setListForm([...listForm,])
     }
 
+    const addExercicio = () => {
+        setExercicios([...exercicios, exercicios.length + 1]);
+    };
+
+    const removeExercicio = (index) => {
+        setExercicios(exercicios.filter((_, i) => i !== index));
+    };
+
     return (
         <View style={{ backgroundColor: '#182649', flex: 1, paddingVertical: 30, }}>
             <View style={styles.header}>
-                <Text style={{ color: '#F0F0F0', fontSize: 45, fontWeight: '600', fontFamily: 'Inter-Bold', }}>Criar treino</Text>
+                <Text style={{ color: '#F0F0F0', fontSize: 45, fontWeight: '600', }}>Criar treino</Text>
             </View>
             <View style={{ flex:1 , justifyContent: 'flex-start' }}>
                 <View style={styles.container}>
                     <View style={styles.containerTreino}>
-                        <TextInput style={{ fontSize: 24, fontFamily: 'Inter-Bold', alignSelf: 'center', margin: 5, }} placeholder='Nome do Treino'></TextInput>
+                        <TextInput style={{ fontSize: 24, alignSelf: 'center', margin: 5, }} placeholder='Nome do Treino'></TextInput>
                     </View>
-                    <View style={styles.containerExerc}>
-                        <TextInput style={{ fontSize: 24, fontWeight: '500',  }}
-                        placeholder='Exercício'
-                        ></TextInput>
-                    </View>
-                    <TouchableOpacity style={styles.addExerc}>
+                    <ScrollView>
+                        {exercicios.map((view, index) => (
+                            <View key={index} style={styles.containerExerc}>
+                            <TextInput style={styles.exercicioInputText}
+                            placeholder='Exercício'
+                            ></TextInput>
+                        </View>
+                        ))}
+                   </ScrollView>
+                    <View style={{ justifyContent: 'center', flexDirection: 'row' }}>
+                    <TouchableOpacity style={styles.addExerc} onPress={addExercicio}>
                         <Image 
                         source={require('../images/plus.png')}
                         style={styles.icon}
                         />
                     </TouchableOpacity>
+                    {/* <TouchableOpacity style={styles.addExerc} onPress={removeExercicio}>
+                        <Image 
+                        source={require('../images/plus.png')}
+                        style={styles.icon}
+                        />
+                    </TouchableOpacity> */}
+                    </View>
                 </View>
 
                 {/* <ScrollView style={{ marginBottom: 10 }}> */}
@@ -87,7 +107,7 @@ const CriarTreino = () => {
                 <View style={{ flexDirection: 'column' }}>
 
                     <TouchableOpacity style={styles.finalizarTreino}>
-                        <Text style={{ fontSize: 30, color: '#F0F0F0', fontFamily: 'Inter-Bold', }}>Finalizar</Text>
+                        <Text style={{ fontSize: 30, color: '#F0F0F0', }}>Finalizar</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -165,7 +185,12 @@ const styles = StyleSheet.create({
         borderWidth: 10,
         borderRadius: 8,
         padding: 6,
+        marginVertical: 6,
     },
+    exercicioInputText: {
+        fontSize: 24,
+        fontWeight: '500'
+    }
 });
 
 export default CriarTreino;

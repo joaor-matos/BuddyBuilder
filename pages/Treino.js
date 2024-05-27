@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRoute } from "@react-navigation/native";
@@ -19,6 +19,65 @@ function Treino({ navigation }) {
     );
   }
 
+  // Função de cronometrar tempo de treino
+
+  const [segundos, setSegundos] = useState(0);
+  const [minutos, setMinutos] = useState(0);
+  const [horas, setHoras] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  const [buttonColor, setButtonColor] = useState('#549E48');
+
+  useEffect(() => {
+    let intervalId;
+
+    if (isRunning) {
+      intervalId = setInterval(() => {
+        setSegundos(segundos => segundos + 1);
+      }, 1000);
+    }
+
+    return () => clearInterval(intervalId);
+  }, [isRunning]);
+
+  const formatTime = value => {
+    return value < 10 ? `0${value}` : value;
+  };
+
+  const startTimer = () => {
+    if (isRunning === false) {
+      setIsRunning(true)
+      const newColor = buttonColor === '#549E48' ? '#AB0000' : '#549E48';
+      setButtonColor(newColor);
+    } else if (isRunning === true) {
+      setIsRunning(false)
+      const newColor = buttonColor === '#AB0000' ? '#549E48' : '#AB0000';
+      setButtonColor(newColor);
+    }
+    ;
+  };
+
+  const stopTimer = () => {
+
+    setIsRunning(false);
+  };
+
+  useEffect(() => {
+    if (segundos === 60) {
+      setSegundos(0);
+      setMinutos(minutos => minutos + 1);
+    }
+
+  }, [segundos, minutos]);
+
+  useEffect(() => {
+    if (minutos === 60) {
+      setMinutos(0);
+      setHoras(horas => horas + 1);
+    }
+
+  }, [segundos, minutos]);
+
   return (
     <Suspense fallback={(
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -27,14 +86,14 @@ function Treino({ navigation }) {
     >
       <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
         <View style={styles.menu}>
-          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}>
-            <View style={{ backgroundColor: '#549E48', height: '60%', width: '60%', borderRadius: 6, }} />
+          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9} onPress={startTimer} >
+            <View style={[styles.btnTimer, { backgroundColor: buttonColor }]} />
           </TouchableOpacity>
-
-          <TouchableOpacity style={styles.timerTreino} activeOpacity={0.9}>
-            <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>0:00:00</Text>
-          </TouchableOpacity>
-
+          <View style={styles.timerTreino}>
+            <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>
+              {formatTime(horas)}:{formatTime(minutos)}:{formatTime(segundos)}
+            </Text>
+          </View>
           <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
             onPress={() => navigation.navigate('Configuracao')}>
             <Image
@@ -42,23 +101,19 @@ function Treino({ navigation }) {
               style={styles.iconMenu}
             />
           </TouchableOpacity>
-
           <StatusBar style="auto" />
-
         </View>
         <View style={styles.viewTreino}>
           <ScrollView style={styles.scrollTreino}>
-            {exercicios.map((exercicio) => 
+            {exercicios.map((exercicio) =>
               <Exercicio key={exercicio?.id} exercicio={exercicio} />
             )}
           </ScrollView>
         </View>
-
         <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, margin: 5, }}>
           <Temporizador />
           <Cronometro />
         </View>
-
       </SafeAreaView>
     </Suspense>
   );
@@ -113,4 +168,10 @@ const styles = StyleSheet.create({
     width: 60,
     borderRadius: 5,
   },
+  btnTimer: {
+    height: '60%',
+    width: '60%',
+    borderRadius: 6,
+  }
+
 })
