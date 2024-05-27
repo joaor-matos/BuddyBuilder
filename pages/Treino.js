@@ -109,7 +109,6 @@ function Treino({ navigation }) {
         <View style={styles.viewTreino}>
           <ScrollView style={styles.scrollTreino}>
             {exercicios.map((exercicio) =>
-            {exercicios.map((exercicio) =>
               <Exercicio key={exercicio?.id} exercicio={exercicio} />
             )}
           </ScrollView>
@@ -172,10 +171,4 @@ const styles = StyleSheet.create({
     width: 60,
     borderRadius: 5,
   },
-  btnTimer: {
-    height: '60%',
-    width: '60%',
-    borderRadius: 6,
-  }
-
 })
