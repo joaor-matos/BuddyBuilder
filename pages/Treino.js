@@ -9,16 +9,16 @@ import Exercicio from '../components/Exercicio';
 import Temporizador from '../components/Temporizador';
 
 function Treino({ navigation }) {
-  // const route = useRoute();
-  // const { exercicios } = route.params;
+  const route = useRoute();
+  const { exercicios } = route.params;
 
-  // if (!exercicios || exercicios.length === 0) {
-  //   return (
-  //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  //       <Text>Nenhum exercício encontrado para este treino.</Text>
-  //     </View>
-  //   );
-  // }
+  if (!exercicios || exercicios.length === 0) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Nenhum exercício encontrado para este treino.</Text>
+      </View>
+    );
+  }
 
   // Função de cronometrar tempo de treino
 
@@ -49,17 +49,17 @@ function Treino({ navigation }) {
     if (isRunning === false) {
       setIsRunning(true)
       const newColor = buttonColor === '#549E48' ? '#AB0000' : '#549E48';
-    setButtonColor(newColor);
+      setButtonColor(newColor);
     } else if (isRunning === true) {
       setIsRunning(false)
       const newColor = buttonColor === '#AB0000' ? '#549E48' : '#AB0000';
-    setButtonColor(newColor);
+      setButtonColor(newColor);
     }
     ;
   };
 
   const stopTimer = () => {
-    
+
     setIsRunning(false);
   };
 
@@ -80,54 +80,54 @@ function Treino({ navigation }) {
   }, [segundos, minutos]);
 
   return (
-    // <Suspense fallback={(
-    //   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    //     <ActivityIndicator size="large" color="#0000FF" />
-    //   </View>)}
-    // >
+    <Suspense fallback={(
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000FF" />
+      </View>)}
+    >
 
 
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
-      <View style={styles.menu}>
-        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9} onPress=
-        
-        {startTimer}> 
-        
-          <View style={[styles.btnTimer, { backgroundColor: buttonColor}]} />
-        </TouchableOpacity>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
+        <View style={styles.menu}>
+          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9} onPress=
 
-        <View style={styles.timerTreino}>
-          <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>
-            {formatTime(horas)}:{formatTime(minutos)}:{formatTime(segundos)}
+            {startTimer}>
+
+            <View style={[styles.btnTimer, { backgroundColor: buttonColor }]} />
+          </TouchableOpacity>
+
+          <View style={styles.timerTreino}>
+            <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>
+              {formatTime(horas)}:{formatTime(minutos)}:{formatTime(segundos)}
             </Text>
+          </View>
+
+          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
+            onPress={() => navigation.navigate('Configuracao')}>
+            <Image
+              source={require('../images/menu.png')}
+              style={styles.iconMenu}
+            />
+          </TouchableOpacity>
+
+          <StatusBar style="auto" />
+
+        </View>
+        <View style={styles.viewTreino}>
+          <ScrollView style={styles.scrollTreino}>
+            {exercicios.map((exercicio) =>
+              <Exercicio key={exercicio?.id} exercicio={exercicio} />
+            )}
+          </ScrollView>
         </View>
 
-        <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
-          onPress={() => navigation.navigate('Configuracao')}>
-          <Image
-            source={require('../images/menu.png')}
-            style={styles.iconMenu}
-          />
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, margin: 5, }}>
+          <Temporizador />
+          <Cronometro />
+        </View>
 
-        <StatusBar style="auto" />
-
-      </View>
-      <View style={styles.viewTreino}>
-        <ScrollView style={styles.scrollTreino}>
-          {/* {exercicios.map((exercicio) => 
-              <Exercicio key={exercicio?.id} exercicio={exercicio} />
-            )} */}
-        </ScrollView>
-      </View>
-
-      <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, margin: 5, }}>
-        <Temporizador />
-        <Cronometro />
-      </View>
-
-    </SafeAreaView>
-    // </Suspense>
+      </SafeAreaView>
+    </Suspense>
   );
 }
 
@@ -181,8 +181,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   btnTimer: {
-    height: '60%', 
-    width: '60%', 
+    height: '60%',
+    width: '60%',
     borderRadius: 6,
   }
 })
