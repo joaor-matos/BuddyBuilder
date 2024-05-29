@@ -51,14 +51,12 @@ const AdicionarExerc = () => {
 };
 
 const CriarTreino = () => {
-
     const [listForm, setListForm] = useState([]);
+    const [exercicios, setExercicios] = useState([1]);
 
     const addExercForm = () => {
         setListForm([...listForm,])
     }
-
-    const [exercicios, setExercicios] = useState([1]);
 
     const addExercicio = () => {
         setExercicios([...exercicios, exercicios.length + 1]);

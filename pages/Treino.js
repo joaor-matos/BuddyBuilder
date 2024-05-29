@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRoute } from "@react-navigation/native";
@@ -74,7 +74,7 @@ function Treino({ navigation }) {
   useEffect(() => {
     if (minutos === 60) {
       setMinutos(0);
-      setHoras(Horas => horas + 1);
+      setHoras(horas => horas + 1);
     }
 
   }, [segundos, minutos]);
@@ -89,19 +89,14 @@ function Treino({ navigation }) {
 
       <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
         <View style={styles.menu}>
-          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9} onPress=
-
-            {startTimer}>
-
+          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9} onPress={startTimer} >
             <View style={[styles.btnTimer, { backgroundColor: buttonColor }]} />
           </TouchableOpacity>
-
           <View style={styles.timerTreino}>
             <Text style={{ fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 }}>
               {formatTime(horas)}:{formatTime(minutos)}:{formatTime(segundos)}
             </Text>
           </View>
-
           <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
             onPress={() => navigation.navigate('Configuracao')}>
             <Image
@@ -109,9 +104,7 @@ function Treino({ navigation }) {
               style={styles.iconMenu}
             />
           </TouchableOpacity>
-
           <StatusBar style="auto" />
-
         </View>
         <View style={styles.viewTreino}>
           <ScrollView style={styles.scrollTreino}>
@@ -120,12 +113,10 @@ function Treino({ navigation }) {
             )}
           </ScrollView>
         </View>
-
         <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, margin: 5, }}>
           <Temporizador />
           <Cronometro />
         </View>
-
       </SafeAreaView>
     </Suspense>
   );
@@ -180,9 +171,4 @@ const styles = StyleSheet.create({
     width: 60,
     borderRadius: 5,
   },
-  btnTimer: {
-    height: '60%',
-    width: '60%',
-    borderRadius: 6,
-  }
 })
