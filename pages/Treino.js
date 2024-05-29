@@ -2,7 +2,6 @@ import React, { Suspense, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRoute } from "@react-navigation/native";
-import { useState, useEffect } from 'react';
 
 import Cronometro from '../components/Cronometro';
 import Exercicio from '../components/Exercicio';

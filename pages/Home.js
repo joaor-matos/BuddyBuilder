@@ -18,7 +18,7 @@ function Home({ navigation }) {
           const userDataFromServer = await getUserById(parseInt(userId), token);
           setUser(userDataFromServer);
         } else {
-          console.log("ID do usuário não encontrado no AsyncStorage")
+          console.log("ID do usuário não encontrado no AsyncStorage");
         }
 
       } catch (error) {
