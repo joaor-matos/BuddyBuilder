@@ -5,29 +5,47 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { getUserById } from '../lib/data';
 
-function Home({ navigation }) {
+function Home({ navigation, route }) {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const token = await AsyncStorage.getItem("token");
+      const userId = await AsyncStorage.getItem("userId");
+
+      if (userId) {
+        const userDataFromServer = await getUserById(parseInt(userId), token);
+        setUser(userDataFromServer);
+      } else {
+        console.log("ID do usuário não encontrado no AsyncStorage");
+      }
+
+    } catch (error) {
+      console.error("Erro ao obter dados do usuário: ", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        const userId = await AsyncStorage.getItem("userId");
-
-        if (userId) {
-          const userDataFromServer = await getUserById(parseInt(userId), token);
-          setUser(userDataFromServer);
-        } else {
-          console.log("ID do usuário não encontrado no AsyncStorage");
-        }
-
-      } catch (error) {
-        console.error("Erro ao obter dados do usuário: ", error);
-      }
-    }
-
     fetchData();
   }, []);
+  
+  useEffect(() => {
+    if (route.params?.reload) {
+      fetchData();
+    }
+  }, [route.params?.reload]);
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000FF" />
+      </View>
+    );
+  }
 
   if (!user) {
     return (

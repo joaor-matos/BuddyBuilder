@@ -5,27 +5,27 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUserById } from '../lib/data';
 import IMC from '../components/IMC';
 
-function CalculoIMC({ navigation }) {
+function CalculoIMC({ navigation, route }) {
   const [user, setUser] = useState(null);
 
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = await AsyncStorage.getItem("token");
         const userId = await AsyncStorage.getItem("userId");
-
+  
         if (userId && token) {
           const userDataFromServer = await getUserById(parseInt(userId), token);
           setUser(userDataFromServer);
         } else {
           console.log("ID do usuário ou token não encontrado no AsyncStorage")
         }
-
+  
       } catch (error) {
         console.error("Erro ao obter dados do usuário: ", error);
       }
     }
-
     fetchData();
   }, []);
 
