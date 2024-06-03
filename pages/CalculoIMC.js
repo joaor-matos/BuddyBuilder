@@ -1,33 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
-import { useState, useEffect, Suspense } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getUserById } from '../lib/data';
+import { Suspense } from 'react';
+import { useUserData } from '../hooks/useUserData';
 import IMC from '../components/IMC';
 
-function CalculoIMC({ navigation, route }) {
-  const [user, setUser] = useState(null);
-
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        const userId = await AsyncStorage.getItem("userId");
-  
-        if (userId && token) {
-          const userDataFromServer = await getUserById(parseInt(userId), token);
-          setUser(userDataFromServer);
-        } else {
-          console.log("ID do usuário ou token não encontrado no AsyncStorage")
-        }
-  
-      } catch (error) {
-        console.error("Erro ao obter dados do usuário: ", error);
-      }
-    }
-    fetchData();
-  }, []);
+function CalculoIMC({ navigation }) {
+  const { user } = useUserData();
 
   if (!user) {
     return (

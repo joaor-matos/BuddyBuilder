@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, ActivityIndicator, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRoute } from "@react-navigation/native";
 
@@ -45,21 +45,43 @@ function Treino({ navigation }) {
   };
 
   const startTimer = () => {
-    if (isRunning === false) {
-      setIsRunning(true)
-      const newColor = buttonColor === '#549E48' ? '#AB0000' : '#549E48';
-      setButtonColor(newColor);
-    } else if (isRunning === true) {
-      setIsRunning(false)
-      const newColor = buttonColor === '#AB0000' ? '#549E48' : '#AB0000';
-      setButtonColor(newColor);
-    }
-    ;
+    setIsRunning(true);
+    const newColor = buttonColor === '#549E48' ? '#AB0000' : '#549E48';
+    setButtonColor(newColor);
   };
 
-  const stopTimer = () => {
-
+  const finalizarTimer = () => {
     setIsRunning(false);
+    const newColor = buttonColor === '#AB0000' ? '#549E48' : '#AB0000';
+    setButtonColor(newColor);
+  };
+
+  const alertTimer = () => {
+    if (isRunning === false) {
+      Alert.alert('Iniciar treino', 'Deseja iniciar o treino?', [
+        {
+          text: 'Iniciar',
+          onPress: () => startTimer(),
+          style: 'default'
+        },
+        {
+          text: 'Não iniciar',
+          style: 'cancel',
+        }
+      ]);
+    } else if (isRunning === true) {
+      Alert.alert('Finalizar treino', 'Deseja Finalizar o treino?', [
+        {
+          text: 'Finalizar',
+          onPress: () => finalizarTimer(),
+          style: 'default'
+        },
+        {
+          text: 'Não finalizar',
+          style: 'cancel',
+        }
+      ]);
+    }
   };
 
   useEffect(() => {
@@ -84,11 +106,9 @@ function Treino({ navigation }) {
         <ActivityIndicator size="large" color="#0000FF" />
       </View>)}
     >
-
-
       <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
         <View style={styles.menu}>
-          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9} onPress={startTimer} >
+          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9} onPress={alertTimer} >
             <View style={[styles.btnTimer, { backgroundColor: buttonColor }]} />
           </TouchableOpacity>
           <View style={styles.timerTreino}>
@@ -169,5 +189,10 @@ const styles = StyleSheet.create({
     height: 60,
     width: 60,
     borderRadius: 5,
+  },
+  btnTimer: {
+    height: '60%',
+    width: '60%',
+    borderRadius: 6,
   },
 })

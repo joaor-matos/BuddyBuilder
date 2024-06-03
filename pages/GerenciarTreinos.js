@@ -47,7 +47,7 @@ function GerenciarTreinos({ navigation }) {
     >
       <SafeAreaView key={user?.id} style={{ backgroundColor: '#182649', flex: 1, paddingVertical: 50, /* justifyContent: 'space-between' */ }}>
         <View style={styles.header}>
-          <Text style={{ color: '#F0F0F0', fontSize: 40, fontWeight: '600', fontFamily: 'Inter-Bold', paddingBottom: 20, alignSelf: 'flex-start' }}>Gerenciar</Text>
+          <Text style={{ color: '#F0F0F0', fontSize: 40, fontWeight: '600', paddingBottom: 20, alignSelf: 'flex-start' }}>Gerenciar</Text>
           <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
             onPress={() => navigation.navigate('Configuracao')}>
             <Image
@@ -59,7 +59,7 @@ function GerenciarTreinos({ navigation }) {
         {user?.treinos && user.treinos.map((treino) => (
           <View key={treino?.id} style={styles.containerTreino}>
             <View style={styles.containerNome}>
-              <Text style={{ fontFamily: 'Inter-Bold', fontSize: 24 }}>{treino?.nome_treino}</Text>
+              <Text style={{ fontSize: 24 }}>{treino?.nome_treino}</Text>
             </View>
             <TouchableOpacity onPress={() => handleDelete(treino.id)}>
               <Image
