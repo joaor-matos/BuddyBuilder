@@ -1,14 +1,17 @@
 import React, { Suspense, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, ActivityIndicator, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useUserData } from "../hooks/useUserData";
 
 import Cronometro from '../components/Cronometro';
 import Exercicio from '../components/Exercicio';
 import Temporizador from '../components/Temporizador';
 
-function Treino({ navigation }) {
+function Treino() {
+  const { user, userId, token } = useUserData();
   const route = useRoute();
+  const navigation = useNavigation()
   const { exercicios } = route.params;
 
   if (!exercicios || exercicios.length === 0) {
@@ -25,7 +28,6 @@ function Treino({ navigation }) {
   const [minutos, setMinutos] = useState(0);
   const [horas, setHoras] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-
   const [buttonColor, setButtonColor] = useState('#549E48');
 
   useEffect(() => {
@@ -56,6 +58,31 @@ function Treino({ navigation }) {
     setButtonColor(newColor);
   };
 
+  const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+
+  const treinoFinalizado = async () => {
+    finalizarTimer();
+    try {
+      const response = await fetch(`http://${baseUrl}:3000/users/${userId}/treinosFinalizados`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ treinosFinalizados: user.treinos_finalizados + 1 }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Erro ao finalizar o treino: ", errorData)
+      }
+
+      navigation.navigate("Home");
+    } catch (error) {
+      console.error("Erro ao finalizar o treino: ", error);
+    }
+  }
+
   const alertTimer = () => {
     if (isRunning === false) {
       Alert.alert('Iniciar treino', 'Deseja iniciar o treino?', [
@@ -73,7 +100,7 @@ function Treino({ navigation }) {
       Alert.alert('Finalizar treino', 'Deseja Finalizar o treino?', [
         {
           text: 'Finalizar',
-          onPress: () => finalizarTimer(),
+          onPress: () => treinoFinalizado(),
           style: 'default'
         },
         {

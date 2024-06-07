@@ -65,7 +65,7 @@ function Home({ navigation, route }) {
         <StatusBar style="auto" />
         <View style={styles.menu}>
           <View style={styles.streakView}>
-            <Text style={{ fontSize: 40, fontWeight: '700', marginHorizontal: 10, }}>0</Text>
+            <Text style={{ fontSize: 40, fontWeight: '700', marginHorizontal: 10, }}>{user.treinos_finalizados}</Text>
             <FontAwesome6 name="fire" size={44} color="black" />
           </View>
 

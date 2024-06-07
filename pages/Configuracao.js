@@ -33,7 +33,7 @@ function Configuracao({ navigation }) {
 
         <View>
           <Text style={{ fontSize: 18, marginBottom: 8, fontWeight: '700' }}>{user?.apelido}</Text>
-          <Text style={{ fontSize: 18 }}>Dias ativo: </Text>
+          <Text style={{ fontSize: 18 }}>Treinos Finalizados: {user?.treinos_finalizados}</Text>
           <Text style={{ fontSize: 18 }}>IMC: {user?.imc}</Text>
         </View>
 
