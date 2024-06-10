@@ -20,7 +20,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='CriarTreino'>
+      <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
         <Stack.Screen options={{ headerShown: false }} name='Treino' component={Treino} />
         <Stack.Screen options={{ headerShown: false }} name='Configuracao' component={ConfigScreen} />

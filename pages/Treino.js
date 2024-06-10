@@ -1,15 +1,17 @@
 import React, { Suspense, useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, ActivityIndicator, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useRoute } from "@react-navigation/native";
-import { useState, useEffect } from 'react';
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useUserData } from "../hooks/useUserData";
 
 import Cronometro from '../components/Cronometro';
 import Exercicio from '../components/Exercicio';
 import Temporizador from '../components/Temporizador';
 
-function Treino({ navigation }) {
+function Treino() {
+  const { user, userId, token } = useUserData();
   const route = useRoute();
+  const navigation = useNavigation()
   const { exercicios } = route.params;
 
   if (!exercicios || exercicios.length === 0) {
@@ -26,7 +28,6 @@ function Treino({ navigation }) {
   const [minutos, setMinutos] = useState(0);
   const [horas, setHoras] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-
   const [buttonColor, setButtonColor] = useState('#549E48');
 
   useEffect(() => {
@@ -46,21 +47,68 @@ function Treino({ navigation }) {
   };
 
   const startTimer = () => {
-    if (isRunning === false) {
-      setIsRunning(true)
-      const newColor = buttonColor === '#549E48' ? '#AB0000' : '#549E48';
-      setButtonColor(newColor);
-    } else if (isRunning === true) {
-      setIsRunning(false)
-      const newColor = buttonColor === '#AB0000' ? '#549E48' : '#AB0000';
-      setButtonColor(newColor);
-    }
-    ;
+    setIsRunning(true);
+    const newColor = buttonColor === '#549E48' ? '#AB0000' : '#549E48';
+    setButtonColor(newColor);
   };
 
-  const stopTimer = () => {
-
+  const finalizarTimer = () => {
     setIsRunning(false);
+    const newColor = buttonColor === '#AB0000' ? '#549E48' : '#AB0000';
+    setButtonColor(newColor);
+  };
+
+  const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+
+  const treinoFinalizado = async () => {
+    finalizarTimer();
+    try {
+      const response = await fetch(`http://${baseUrl}:3000/users/${userId}/treinosFinalizados`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ treinosFinalizados: user.treinos_finalizados + 1 }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Erro ao finalizar o treino: ", errorData)
+      }
+
+      navigation.navigate("Home");
+    } catch (error) {
+      console.error("Erro ao finalizar o treino: ", error);
+    }
+  }
+
+  const alertTimer = () => {
+    if (isRunning === false) {
+      Alert.alert('Iniciar treino', 'Deseja iniciar o treino?', [
+        {
+          text: 'Iniciar',
+          onPress: () => startTimer(),
+          style: 'default'
+        },
+        {
+          text: 'Não iniciar',
+          style: 'cancel',
+        }
+      ]);
+    } else if (isRunning === true) {
+      Alert.alert('Finalizar treino', 'Deseja Finalizar o treino?', [
+        {
+          text: 'Finalizar',
+          onPress: () => treinoFinalizado(),
+          style: 'default'
+        },
+        {
+          text: 'Não finalizar',
+          style: 'cancel',
+        }
+      ]);
+    }
   };
 
   useEffect(() => {
@@ -85,11 +133,9 @@ function Treino({ navigation }) {
         <ActivityIndicator size="large" color="#0000FF" />
       </View>)}
     >
-
-
       <SafeAreaView style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
         <View style={styles.menu}>
-          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9} onPress={startTimer} >
+          <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9} onPress={alertTimer} >
             <View style={[styles.btnTimer, { backgroundColor: buttonColor }]} />
           </TouchableOpacity>
           <View style={styles.timerTreino}>
@@ -170,5 +216,10 @@ const styles = StyleSheet.create({
     height: 60,
     width: 60,
     borderRadius: 5,
+  },
+  btnTimer: {
+    height: '60%',
+    width: '60%',
+    borderRadius: 6,
   },
 })

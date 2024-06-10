@@ -1,32 +1,9 @@
 //Componentes
 import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native"
-import { useState, useEffect } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getUserById } from "../lib/data";
+import { useUserData } from "../hooks/useUserData";
 
 function Configuracao({ navigation }) {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        const userId = await AsyncStorage.getItem("userId");
-
-        if (userId) {
-          const userDataFromServer = await getUserById(parseInt(userId), token);
-          setUser(userDataFromServer);
-        } else {
-          console.log("ID do usuário não encontrado no AsyncStorage")
-        }
-
-      } catch (error) {
-        console.error("Erro ao obter dados do usuário: ", error);
-      }
-    }
-
-    fetchData();
-  }, []);
+  const { user } = useUserData();
 
   if (!user) {
     return (
@@ -56,7 +33,7 @@ function Configuracao({ navigation }) {
 
         <View>
           <Text style={{ fontSize: 18, marginBottom: 8, fontWeight: '700' }}>{user?.apelido}</Text>
-          <Text style={{ fontSize: 18 }}>Dias ativo: </Text>
+          <Text style={{ fontSize: 18 }}>Treinos Finalizados: {user?.treinos_finalizados}</Text>
           <Text style={{ fontSize: 18 }}>IMC: {user?.imc}</Text>
         </View>
 

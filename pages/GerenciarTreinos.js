@@ -1,80 +1,35 @@
-import React, { cloneElement, useState, useEffect, Suspense } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import React, { Suspense } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getUserById } from '../lib/data';
-
-// const AdicionarExerc = () => {
-  /* const [fontsLoaded] = useFonts({
-      'Inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
-  }); */
-
-  // const [quantPeso, setPeso] = useState();
-//   const [quantSet, setSet] = useState();
-//   const [quantRep, setRep] = useState();
-//   const [nomeExerc, setNomeExerc] = useState();
-//   const [treino, setTreino] = useState([]);
-//   const [nomeTreino, setNomeTreino] = useState();
-
-//   const handleTreino = () => {
-//     const arrExerc = {
-//       nome: nomeExerc,
-//       peso: quantPeso,
-//       set: quantSet,
-//       rep: quantRep,
-//     }
-
-//     setTreino([...treino, arrExerc]);
-//     setPeso('');
-//     setSet('');
-//     setRep('');
-//     setNomeExerc('');
-//   };
-//   return (
-//     <View style={{ borderColor: 'black', borderWidth: 2, paddingTop: 7, paddingHorizontal: 5, borderRadius: 10, }}>
-//       <TextInput style={styles.exercInput} placeholder='Nome do Exercício'
-//         value={nomeExerc}
-//         onChangeText={text => setNomeExerc(text)}>
-//       </TextInput>
-//       <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
-//         <TextInput style={styles.exercInput} placeholder='Peso'
-//           value={quantPeso}
-//           onChangeText={text => setPeso(text)}></TextInput>
-//         <TextInput style={styles.exercInput} placeholder='Sets'
-//           value={quantSet}
-//           onChangeText={text => setSet(text)}></TextInput>
-//         <TextInput style={styles.exercInput} placeholder='Repetições'
-//           value={quantRep}
-//           onChangeText={text => setRep(text)}></TextInput>
-//       </View>
-//     </View>
-//   );
-// };
+import { deleteTreino, deleteUserTreino } from '../lib/data';
+import { useUserData } from '../hooks/useUserData';
 
 function GerenciarTreinos({ navigation }) {
-  // const [listForm, setListForm] = useState([]);
-  const [user, setUser] = useState(null);
+  const { user, token, userId } = useUserData();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        const userId = await AsyncStorage.getItem("userId");
+  const handleDelete = async (treinoId) => {
+    try {
+      const userTreinoResponse = await deleteUserTreino(userId, treinoId, token)
 
-        if (userId && token) {
-          const userDataFromServer = await getUserById(parseInt(userId), token);
-          setUser(userDataFromServer);
+      if (userTreinoResponse.ok) {
+        console.log("A associação do usuário com o treino foi removido");
+
+        const response = await deleteTreino(treinoId, token);
+
+        if (response.ok || response.status === 204) {
+          console.log("Treino removido com sucesso.");
+          navigation.navigate("Home", { reload: true });
         } else {
-          console.log("ID do usuário ou token não encontrado no AsyncStorage")
+          console.error("Erro ao remover o treino: ", await response.json());
         }
 
-      } catch (error) {
-        console.error("Erro ao obter dados do usuário: ", error);
+      } else {
+        console.error("Erro ao desfazer a associação do usuário com o treino", await userTreinoResponse.json());
       }
+    } catch (error) {
+      console.error("Erro ao excluir o treino: ", error);
     }
-
-    fetchData();
-  }, []);
+  }
 
   if (!user) {
     return (
@@ -84,10 +39,6 @@ function GerenciarTreinos({ navigation }) {
     )
   }
 
-  // const addExercForm = () => {
-  //   setListForm([...listForm,])
-  // }
-
   return (
     <Suspense fallback={(
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -96,7 +47,7 @@ function GerenciarTreinos({ navigation }) {
     >
       <SafeAreaView key={user?.id} style={{ backgroundColor: '#182649', flex: 1, paddingVertical: 50, /* justifyContent: 'space-between' */ }}>
         <View style={styles.header}>
-          <Text style={{ color: '#F0F0F0', fontSize: 40, fontWeight: '600', fontFamily: 'Inter-Bold', paddingBottom: 20, alignSelf: 'flex-start' }}>Gerenciar</Text>
+          <Text style={{ color: '#F0F0F0', fontSize: 40, fontWeight: '600', paddingBottom: 20, alignSelf: 'flex-start' }}>Gerenciar</Text>
           <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
             onPress={() => navigation.navigate('Configuracao')}>
             <Image
@@ -108,12 +59,14 @@ function GerenciarTreinos({ navigation }) {
         {user?.treinos && user.treinos.map((treino) => (
           <View key={treino?.id} style={styles.containerTreino}>
             <View style={styles.containerNome}>
-              <Text style={{ fontFamily: 'Inter-Bold', fontSize: 24 }}>{treino?.nome_treino}</Text>
+              <Text style={{ fontSize: 24 }}>{treino?.nome_treino}</Text>
             </View>
-            <Image
-              source={require('../images/lixo.png')}
-              style={styles.icon}
-            />
+            <TouchableOpacity onPress={() => handleDelete(treino.id)}>
+              <Image
+                source={require('../images/lixo.png')}
+                style={styles.icon}
+              />
+            </TouchableOpacity>
           </View>
         ))}
       </SafeAreaView >
@@ -183,4 +136,3 @@ const styles = StyleSheet.create({
 
   },
 });
-
