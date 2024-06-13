@@ -40,7 +40,7 @@ function Configuracao({ navigation }) {
       </View>
       <View style={styles.conta}>
         <Text style={styles.text}>Configurações</Text>
-        <TouchableOpacity style={styles.btn} activeOpacity={0.9}><Text style={{ fontSize: 20, fontWeight: "500" }}>Apelido</Text></TouchableOpacity>
+        {/* <TouchableOpacity style={styles.btn} activeOpacity={0.9}><Text style={{ fontSize: 20, fontWeight: "500" }}>Apelido</Text></TouchableOpacity> */}
         <TouchableOpacity style={styles.btn} activeOpacity={0.9}
           onPress={() => navigation.navigate('IMC')}><Text style={{ fontSize: 20, fontWeight: "500" }}>Calculo IMC</Text></TouchableOpacity>
         <TouchableOpacity style={styles.btn} activeOpacity={0.9}

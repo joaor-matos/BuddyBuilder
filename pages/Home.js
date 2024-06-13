@@ -1,44 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ActivityIndicator } from 'react-native';
-import { Suspense, useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Suspense } from 'react';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { getUserById } from '../lib/data';
+import { useUserData } from '../hooks/useUserData';
 
-function Home({ navigation, route }) {
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+function Home({ navigation }) {
+  const { user, isLoading } = useUserData();
   
-  const fetchData = async () => {
-    setIsLoading(true);
-    try {
-      const token = await AsyncStorage.getItem("token");
-      const userId = await AsyncStorage.getItem("userId");
-
-      if (userId) {
-        const userDataFromServer = await getUserById(parseInt(userId), token);
-        setUser(userDataFromServer);
-      } else {
-        console.log("ID do usuário não encontrado no AsyncStorage");
-      }
-
-    } catch (error) {
-      console.error("Erro ao obter dados do usuário: ", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  
-  useEffect(() => {
-    if (route.params?.reload) {
-      fetchData();
-    }
-  }, [route.params?.reload]);
-
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -61,16 +29,16 @@ function Home({ navigation, route }) {
         <ActivityIndicator size="large" color="#0000FF" />
       </View>)}
     >
-      <SafeAreaView key={user.id} style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
+      <SafeAreaView key={user?.id} style={{ flex: 1, backgroundColor: '#182649', flexDirection: 'column' }}>
         <StatusBar style="auto" />
         <View style={styles.menu}>
           <View style={styles.streakView}>
-            <Text style={{ fontSize: 40, fontWeight: '700', marginHorizontal: 10, }}>{user.treinos_finalizados}</Text>
+            <Text style={{ fontSize: 40, fontWeight: '700', marginHorizontal: 10, }}>{user?.treinos_finalizados}</Text>
             <FontAwesome6 name="fire" size={44} color="black" />
           </View>
 
           <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
-            onPress={() => navigation.navigate('Configuracao', { userId: user.id })}>
+            onPress={() => navigation.navigate('Configuracao', { userId: user?.id })}>
             <Image
               source={require('../images/menu.png')}
               style={styles.iconMenu}
