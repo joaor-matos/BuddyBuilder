@@ -77,7 +77,7 @@ function Treino() {
         console.error("Erro ao finalizar o treino: ", errorData)
       }
 
-      navigation.navigate("Home");
+      // navigation.navigate("Home");
     } catch (error) {
       console.error("Erro ao finalizar o treino: ", error);
     }
@@ -144,7 +144,7 @@ function Treino() {
             </Text>
           </View>
           <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
-            onPress={() => navigation.navigate('Configuracao')}>
+            onPress={() => navigation.navigate('Home', { reload: true })}>
             <Image
               source={require('../images/menu.png')}
               style={styles.iconMenu}

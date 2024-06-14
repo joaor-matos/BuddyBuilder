@@ -42,7 +42,7 @@ const CriarTreino = ({ navigation }) => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({idUser: parseInt(userId), idTreino: parseInt(treinoId)}),
+          body: JSON.stringify({ idUser: parseInt(userId), idTreino: parseInt(treinoId) }),
         });
 
         if (userTreinoResponse.ok) {
@@ -62,9 +62,11 @@ const CriarTreino = ({ navigation }) => {
     }
   }
 
-  // const removeExercicio = (index) => {
-  //   setExercicios(exercicios.filter((_, i) => i !== index));
-  // };
+  const removeExercicio = () => {
+    if (exercicios.length > 1) {
+      setExercicios(exercicios.slice(0, -1));
+    }
+  };
 
   if (!user) {
     return (
@@ -107,27 +109,22 @@ const CriarTreino = ({ navigation }) => {
                 </View>
               ))}
             </ScrollView>
-            <View style={{ justifyContent: 'center', flexDirection: 'row' }}>
+            <View style={{ justifyContent: 'center', flexDirection: 'row', gap: 36 }}>
               <TouchableOpacity style={styles.addExerc} onPress={addExercicio}>
                 <Image
                   source={require('../images/plus.png')}
                   style={styles.icon}
                 />
               </TouchableOpacity>
-              {/* <TouchableOpacity style={styles.addExerc} onPress={removeExercicio}>
-                        <Image 
-                        source={require('../images/plus.png')}
-                        style={styles.icon}
-                        />
-                    </TouchableOpacity> */}
+              <TouchableOpacity style={styles.addExerc} onPress={removeExercicio}>
+                <Image
+                  source={require('../images/menos.png')}
+                  style={{width: 28}}
+                />
+              </TouchableOpacity>
             </View>
           </View>
-
-          {/* <ScrollView style={{ marginBottom: 10 }}> */}
-
-          {/* </ScrollView> */}
           <View style={{ flexDirection: 'column' }}>
-
             <TouchableOpacity style={styles.finalizarTreino} onPress={handleSubmit}>
               <Text style={{ fontSize: 30, color: '#F0F0F0', }}>Finalizar</Text>
             </TouchableOpacity>
