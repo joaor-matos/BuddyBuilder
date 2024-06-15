@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
-export const useTreino = (baseUrl, token, userId) => {
+export const useCriarTreino = (baseUrl, token, userId) => {
+  const navigation = useNavigation();
+
   const [nomeTreino, setNomeTreino] = useState("");
   const [exercicios, setExercicios] = useState([{ nomeExercicio: "" }]);
 
@@ -46,6 +49,7 @@ export const useTreino = (baseUrl, token, userId) => {
         }
         setNomeTreino("");
         setExercicios([{ nomeExercicio: "" }]);
+        navigation.navigate("Home", { reload: true });
       } else {
         console.error("Erro ao criar treino: ", await response.json());
       }
@@ -55,6 +59,12 @@ export const useTreino = (baseUrl, token, userId) => {
     }
   }
 
+  const removeExercicio = () => {
+    if (exercicios.length > 1) {
+      setExercicios(exercicios.slice(0, -1));
+    }
+  };
+
   return {
     nomeTreino,
     setNomeTreino,
@@ -62,5 +72,6 @@ export const useTreino = (baseUrl, token, userId) => {
     addExercicio,
     handleExercicioChange,
     handleSubmit,
+    removeExercicio
   };
 }
