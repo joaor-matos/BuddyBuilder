@@ -1,35 +1,12 @@
 import React, { Suspense } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { deleteTreino, deleteUserTreino } from '../lib/data';
 import { useUserData } from '../hooks/useUserData';
+import { useGerenciarTreino } from '../hooks/useGerenciarTreino';
 
 function GerenciarTreinos({ navigation }) {
   const { user, token, userId } = useUserData();
-
-  const handleDelete = async (treinoId) => {
-    try {
-      const userTreinoResponse = await deleteUserTreino(userId, treinoId, token)
-
-      if (userTreinoResponse.ok) {
-        console.log("A associação do usuário com o treino foi removido");
-
-        const response = await deleteTreino(treinoId, token);
-
-        if (response.ok || response.status === 204) {
-          console.log("Treino removido com sucesso.");
-          navigation.navigate("Home", { reload: true });
-        } else {
-          console.error("Erro ao remover o treino: ", await response.json());
-        }
-
-      } else {
-        console.error("Erro ao desfazer a associação do usuário com o treino", await userTreinoResponse.json());
-      }
-    } catch (error) {
-      console.error("Erro ao excluir o treino: ", error);
-    }
-  }
+  const handleDelete = useGerenciarTreino(token, userId);
 
   if (!user) {
     return (
@@ -114,7 +91,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-
   },
   containerNome: {
     fontSize: 20,
@@ -125,7 +101,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
     width: 300,
-
   },
   icon: {
     alignItems: 'center',
@@ -133,6 +108,5 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     marginHorizontal: 10,
-
   },
 });
