@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Suspense } from 'react';
-import { View, Text, StyleSheet, Touchable, TouchableHighlight, TouchableOpacity, SectionList, ActivityIndicator } from 'react-native';
+import React, { useState, Suspense } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 
 const Exercicio = ({exercicio}) => {
   const [isTextStriked, setTextStriked] = useState(false);

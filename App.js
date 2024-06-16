@@ -14,10 +14,6 @@ import Home from './pages/Home';
 const Stack = createNativeStackNavigator();
 
 function App() {
-  // const [fontsLoaded] = useFonts({
-  //   'Inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
-  // });
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'>
