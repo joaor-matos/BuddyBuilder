@@ -12,15 +12,15 @@ function Treino() {
   const { user, userId, token } = useUserData();
   const route = useRoute();
   const navigation = useNavigation()
-  const { exercicios } = route.params;
+   const { exercicios } = route.params;
 
-  if (!exercicios || exercicios.length === 0) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Nenhum exercício encontrado para este treino.</Text>
-      </View>
-    );
-  }
+   if (!exercicios || exercicios.length === 0) {
+     return (
+       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+         <Text>Nenhum exercício encontrado para este treino.</Text>
+       </View>
+     );
+   }
 
   // Função de cronometrar tempo de treino
 

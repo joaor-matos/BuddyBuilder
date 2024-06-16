@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 import { AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 
 const Temporizador = () => {
   const [tempo, setTempo] = useState(0);
   const [tempoDefinido, setTempoDefinido] = useState("0:00");
   const [isRunning, setIsRunning] = useState(false);
+  const [isPause, setIsPause] = useState(false);
+  const [isEditble, setIsEditable] = useState(true);
 
   useEffect(() => {
     let intervalId;
@@ -37,42 +39,56 @@ const Temporizador = () => {
     if (!isNaN(totalSeconds) && totalSeconds > 0) {
       setTempo(totalSeconds);
       setIsRunning(true);
+      setIsEditable(false);
     }
   };
 
-  const stopTimer = () => {
-    setIsRunning(false);
+  const pauseTimer = () => {
+    if (isPause == false) {
+      setIsRunning(false);
+      setIsPause(true);
+    } else {
+      setIsRunning(true)
+      setIsPause(false)
+    }
+      
   };
 
   const resetTimer = () => {
     setTempo(0);
     setIsRunning(false);
-    setTempoDefinido("0:00");
+    setTempoDefinido("00:00");
+    setIsEditable(true);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.viewTemp}>
       <Text style={{ fontSize: 28, fontWeight: '600', marginBottom: 8, justifyContent: 'space-around' }}>Temporizador</Text>
-        <View style={{ backgroundColor: '#F0F0F0', width: 280, borderRadius: 5, }}>
-          <Text style={styles.timerText}>{formatTime(tempo)}</Text>
-        </View>
-        <TextInput
-          style={styles.input}
-          keyboardType="numeric"
-          value={tempoDefinido}
+        <View style={{ backgroundColor: '#F0F0F0', width: 280, borderRadius: 5, justifyContent: 'center' }}>
+          <TextInput style={styles.timerText} 
+          // value={tempoDefinido}
           onChangeText={(text) => setTempoDefinido(text)}
-          placeholder="Min:Sec"
-        />
+          editable={isEditble}
+          >{formatTime(tempo)} 
+          
+          </TextInput>
+        </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={startTimer}>
-          <AntDesign name="caretright" size={34} color="#5A76C0" />
+          <Image
+          source={require('../images/playIcon.png')}
+          style={styles.icon}/>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={stopTimer}>
-          <FontAwesome5 name="pause" size={34} color="#549E48" />
+          <TouchableOpacity style={styles.button} onPress={pauseTimer}>
+          <Image
+          source={require('../images/pauseIcon.png')}
+          style={styles.icon}/>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={resetTimer}>
-          <Entypo name="ccw" size={34} color="#A63434" />
+          <Image
+          source={require('../images/restartIcon.png')}
+          style={styles.icon}/>
           </TouchableOpacity>
         </View>
       </View>
@@ -88,17 +104,19 @@ const styles = StyleSheet.create({
   },
   viewTemp: {
     backgroundColor: '#D9D9D9',
-    height: 200,
+    height: 180,
     width: 300,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   timerText: {
+    color: '#000000',
     fontSize: 40,
     fontWeight: 'bold',
     marginVertical: 2,
     alignSelf: 'center',
+    justifyContent: 'center'
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -113,6 +131,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 6,
     borderRadius: 2,
     marginVertical: 5,
+    padding: 10,
   },
   buttonText: {
     fontSize: 16,
@@ -129,6 +148,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     width: 80,
   },
+  icon: {
+    height: 26,
+    width: 26,
+  }
 });
 
 export default Temporizador;
