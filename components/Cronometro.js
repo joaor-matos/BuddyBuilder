@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 
 const Cronometro = () => {
   const [segundos, setSegundos] = useState(0);
