@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, ActivityIndicator, } from "react-native";
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, ActivityIndicator, Image, } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -40,7 +40,11 @@ function Login({ navigation }) {
 
   return (
     <SafeAreaView style={{ alignItems: "center", justifyContent: "space-between", flex: 1 }} >
-      <View style={styles.logoContainer} />
+      <View style={styles.logoContainer}>
+        <Image source={require('../images/logo.png')}
+        style={styles.logo}
+        />
+      </View>
       <View style={{ alignItems: "center", justifyContent: "center", marginTop: 20 }} >
         <TextInput
           style={styles.input}
@@ -90,6 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    
   },
   input: {
     width: 300,
@@ -119,6 +124,13 @@ const styles = StyleSheet.create({
   logoContainer: {
     backgroundColor: '#182649',
     flex: 1,
-    width: '100%'
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    flex: 0.6,
+    aspectRatio: 1,
+
   },
 });

@@ -105,7 +105,7 @@ function CadastroScreen({ navigation }) {
 
         <TouchableOpacity
           title="Login" style={styles.btnCadastro} onPress={() => navigation.navigate('Login')} >
-          <Text style={{ fontWeight: "bold", textAlign: 'center' }}>
+          <Text style={{ fontWeight: "bold", textAlign: 'center', fontSize: 20, }}>
             Fazer Login
           </Text>
         </TouchableOpacity>

@@ -9,18 +9,18 @@ import Exercicio from '../components/Exercicio';
 import Temporizador from '../components/Temporizador';
 
 function Treino() {
-  const { user, userId, token } = useUserData();
-  const route = useRoute();
-  const navigation = useNavigation()
-   const { exercicios } = route.params;
+   const { user, userId, token } = useUserData();
+   const route = useRoute();
+   const navigation = useNavigation()
+    const { exercicios } = route.params;
 
-   if (!exercicios || exercicios.length === 0) {
-     return (
-       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-         <Text>Nenhum exercício encontrado para este treino.</Text>
-       </View>
-     );
-   }
+    if (!exercicios || exercicios.length === 0) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text>Nenhum exercício encontrado para este treino.</Text>
+        </View>
+      );
+    }
 
   // Função de cronometrar tempo de treino
 
@@ -58,7 +58,7 @@ function Treino() {
     setButtonColor(newColor);
   };
 
-  const baseUrl = process.env.EXPO_PUBLIC_API_URL;
+   const baseUrl = process.env.EXPO_PUBLIC_API_URL;
 
   const treinoFinalizado = async () => {
     finalizarTimer();
@@ -154,9 +154,9 @@ function Treino() {
         </View>
         <View style={styles.viewTreino}>
           <ScrollView style={styles.scrollTreino}>
-            {exercicios.map((exercicio) =>
+             {exercicios.map((exercicio) =>
               <Exercicio key={exercicio?.id} exercicio={exercicio} />
-            )}
+            )} 
           </ScrollView>
         </View>
         <View style={{ flexDirection: 'column', justifyContent: 'space-between', padding: 20, margin: 5, }}>

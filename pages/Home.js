@@ -5,23 +5,23 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { useUserData } from '../hooks/useUserData';
 
 function Home({ navigation }) {
-  const { user, isLoading } = useUserData();
+   const { user, isLoading } = useUserData();
   
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000FF" />
-      </View>
-    );
-  }
+   if (isLoading) {
+     return (
+       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+         <ActivityIndicator size="large" color="#0000FF" />
+       </View>
+     );
+   }
 
-  if (!user) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Usuário não encontrado.</Text>
-      </View>
-    )
-  }
+   if (!user) {
+     return (
+       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+         <Text>Usuário não encontrado.</Text>
+       </View>
+     )
+   }
 
   return (
     <Suspense fallback={(
@@ -34,7 +34,10 @@ function Home({ navigation }) {
         <View style={styles.menu}>
           <View style={styles.streakView}>
             <Text style={{ fontSize: 40, fontWeight: '700', marginHorizontal: 10, }}>{user?.treinos_finalizados}</Text>
-            <FontAwesome6 name="fire" size={44} color="black" />
+            <Image
+              source={require('../images/streakIcon.png')}
+              style={styles.iconStreak}
+            />
           </View>
 
           <TouchableOpacity style={styles.bttnMenu} activeOpacity={0.9}
@@ -132,5 +135,10 @@ const styles = StyleSheet.create({
     height: 60,
     width: 60,
     borderRadius: 5,
+  },
+  iconStreak: {
+    alignSelf: 'center',
+    height: 50,
+    width: 50,
   },
 });
