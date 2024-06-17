@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
-import { AntDesign, Entypo, FontAwesome5 } from '@expo/vector-icons';
 
 const Temporizador = () => {
   const [tempo, setTempo] = useState(0);

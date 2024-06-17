@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ActivityIndicator } from 'react-native';
 import { Suspense } from 'react';
-import { FontAwesome6 } from '@expo/vector-icons';
 import { useUserData } from '../hooks/useUserData';
 
 function Home({ navigation }) {
